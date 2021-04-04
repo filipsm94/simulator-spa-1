@@ -107,92 +107,183 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
-     public void pintarBase(Graphics g){
-        g.setColor( Color.BLACK );
+    public void pintarBase(Graphics g){
+        buildBUS(g);
+        buildPC(g);
+        buildMAR(g);
+        buildRAM(g);
+        buildIR(g);
+        buildUC(g);
+        buildAC(g);
+        buildALU(g);
+        buildB(g);
+        buildOUT(g);
+        buildResult(g);
+    }
+    
+    public void buildLinesLeftBoardOUT(int xi, int xf, Graphics g){
+        //OuT LINE
+        for(int i = xi+5; i <= xf-5;i = i+5){
+            g.drawLine( 140, i, 230, i );
+        }
+        // ARROW OUT
+        int middle = (xi+xf)/2;
+        g.drawLine( 190, xi, 205, middle );
+        g.drawLine( 190, xf, 205, middle );
+    }
+    
+    public void buildLinesLeftBoardIN(int xi, int xf, Graphics g){
+        //OuT LINE
+        for(int i = xi+5; i <= xf-5;i = i+5){
+            g.drawLine( 140, i, 230, i );
+        }
+        // ARROW OUT
+        int middle = (xi+xf)/2;
+        g.drawLine( 155, middle, 170, xi );
+        g.drawLine( 155, middle, 170, xf );
+    }
+    
+    
+    public void buildLinesRightBoardOUT(int xi, int xf, Graphics g){
+        //OuT LINE
+        for(int i = xi+5; i <= xf-5;i = i+5){
+            g.drawLine( 310, i, 380, i );
+        }
+        // ARROW OUT
+        int middle = (xi+xf)/2;
+        g.drawLine( 320, middle, 335, xi );
+        g.drawLine( 320, middle, 335, xf );
+    }
+    
+    public void buildLinesRightBoardIN(int xi, int xf, Graphics g){
+        //OuT LINE
+        for(int i = xi+5; i <= xf-5;i = i+5){
+            g.drawLine( 310, i, 380, i );
+        }
+        // ARROW OUT
+        int middle = (xi+xf)/2;
+        g.drawLine( 350, xi, 365, middle );
+        g.drawLine( 350, xf, 365, middle );
+    }
+    
+    
+     // Begin center board
+    public void buildBUS(Graphics g){
+        g.drawString( "0", 310, 60);
+        g.drawLine(310, 60, 310, 480 );
         
-        //MAR
-        g.drawString( "MAR", 40, 60 );
-        g.drawRect( 40, 60, 120, 60 );
-        //OUT MAR
-        g.drawLine( 160, 80, 260, 80 );
-        //IN MAR
-        g.drawLine( 160, 100, 260, 100 );
+        g.drawString( "1", 300, 60);
+        g.drawLine(300, 60, 300, 480 );
         
+        g.drawString( "2", 290, 60);
+        g.drawLine(290, 60, 290, 480 );
+        
+        g.drawString( "3", 280, 60);
+        g.drawLine(280, 60, 280, 480 );
+        
+        g.drawString( "4", 270, 60);
+        g.drawLine(270, 60, 270, 480 );
+        
+        g.drawString( "5", 260, 60);
+        g.drawLine(260, 60, 260, 480 );
+        
+        g.drawString( "6", 250, 60);
+        g.drawLine(250, 60, 250, 480 );
+        
+        g.drawString( "7", 240, 60);
+        g.drawLine(240, 60, 240, 480 );
+    };
+    // End Center board
+    
+    // Begin left board
+    public void buildPC(Graphics g){
+        g.drawString( "PC", 20, 60 );
+        g.drawRect( 20, 60, 120, 60 );
+        
+        buildLinesLeftBoardOUT(60,90,g);
+        buildLinesLeftBoardIN(90,120,g);
+    };
+    
+    public void buildMAR(Graphics g){
+        g.drawString("MAR", 20, 140);
+        g.drawRect( 20, 140, 120, 60 );
+        
+        buildLinesLeftBoardOUT(140,170,g);
+        buildLinesLeftBoardIN(170,200,g);
+        
+    };
+    
+    public void buildRAM(Graphics g){
         //RAM
-        g.drawString( "RAM", 40, 140 );
-        g.drawRect( 40, 140, 120, 60 );
-        //OUT RAM
-        g.drawLine( 160, 160, 260, 160 );
-        //IN MAR
-        g.drawLine( 160, 180, 260, 180 );
-        
-        //PC
-        g.drawString( "PC", 40, 220 );
-        g.drawRect( 40, 220, 120, 60 );
-        //OUT PC
-        g.drawLine( 160, 240, 260, 240 );
-        //IN PC
-        g.drawLine( 160, 260, 260, 260 );
-        
-        //RI
+        g.drawString( "RAM", 20, 220 );
+        g.drawRect( 20, 220, 120, 60 );
+        buildLinesLeftBoardOUT(220,250,g);
+        buildLinesLeftBoardIN(250,280,g);
+    };
+    
+    public void buildIR(Graphics g){
+         //RI
         g.drawString( "REG. INST.", 40, 300 );
-        g.drawRect( 40, 300, 120, 60 );
-        //OUT RI
-        g.drawLine( 160, 320, 260, 320 );
-        //IN RI
-        g.drawLine( 160, 340, 260, 340 );
-        
-        //CS
-        g.drawString( "PC", 40, 380 );
-        g.drawRect( 40, 380, 120, 60 );
-        //OUT CS
-        g.drawLine( 160, 400, 260, 400 );
-        //IN CS
-        g.drawLine( 160, 420, 260, 420 );
-        
-        //BUS
-        g.drawRect( 260, 60, 20, 380 );
-        
+        g.drawRect( 20, 300, 120, 60 );
+        buildLinesLeftBoardOUT(300,330,g);
+        buildLinesLeftBoardIN(330,360,g);
+    };
+    
+    public void buildUC(Graphics g){
+         //CS
+        g.drawString( "UC", 20, 380 );
+        g.drawRect( 20, 380, 120, 60 );
+        buildLinesLeftBoardOUT(380,410,g);
+        buildLinesLeftBoardIN(410,440,g);
+    };
+    // End left board
+    
+    // Begin Rigth board
+    public void buildAC(Graphics g){
         //A
         g.drawString( "A", 380, 60 );
         g.drawRect(380, 60, 120, 60 );
-        //OUT A
-        g.drawLine( 280, 80, 380, 80 );
-        //IN A
-        g.drawLine( 280, 100, 380, 100 );
         
+        buildLinesRightBoardOUT(60,90,g);
+        buildLinesRightBoardIN(90,120,g);
+    };
+    
+    public void buildALU(Graphics g){
         //ALU
         g.drawString( "ALU", 380, 140 );
         g.drawRect( 380, 140, 120, 60 );
-        //OUT ALU
-        g.drawLine( 280, 160, 380, 160 );
-        //IN ALU
-        g.drawLine( 280, 180, 380, 180 );
         
+        buildLinesRightBoardOUT(140,170,g);
+        buildLinesRightBoardIN(170,200,g);
+    };
+    
+    public void buildB(Graphics g){
         //B
         g.drawString( "B", 380, 220 );
         g.drawRect( 380, 220, 120, 60 );
-        //OUT B
-        g.drawLine( 280, 240, 380, 240 );
-        //IN B
-        g.drawLine( 280, 260, 380, 260 );
         
+        buildLinesRightBoardOUT(220,250,g);
+        buildLinesRightBoardIN(250,280,g);
+    };
+    
+    public void buildOUT(Graphics g){
         //RS
         g.drawString( "RS", 380, 300 );
         g.drawRect( 380, 300, 120, 60 );
-        //OUT RS
-        g.drawLine( 280, 320, 380, 320 );
-        //IN RS
-        g.drawLine( 280, 340, 380, 340 );
         
-        //DISPLAY
+        buildLinesRightBoardOUT(300,330,g);
+        buildLinesRightBoardIN(330,360,g);
+    };
+    
+    public void buildResult(Graphics g){
+         //DISPLAY
         g.drawString( "DISPLAY", 380, 380);
         g.drawRect( 380, 380, 120, 60 );
-        //OUT DISPLAY
-        g.drawLine( 280, 400, 380, 400 );
-        //IN DISPLAY
-        g.drawLine( 280, 420, 380, 420 );
-    }
+        
+        buildLinesRightBoardOUT(380,410,g);
+        buildLinesRightBoardIN(410,440,g);
+    };
+    // End Rigth board
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
