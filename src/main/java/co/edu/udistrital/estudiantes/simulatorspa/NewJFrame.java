@@ -6,6 +6,7 @@
 package co.edu.udistrital.estudiantes.simulatorspa;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 
 /**
@@ -13,6 +14,19 @@ import java.awt.Graphics;
  * @author jhogarcia
  */
 public class NewJFrame extends javax.swing.JFrame {
+    
+    private javax.swing.JButton jButton1;
+    private IComponentsSimulator PC;
+    private IComponentsSimulator MAR;
+    private IComponentsSimulator RAM;
+    private IComponentsSimulator IR;
+    private IComponentsSimulator UC;
+    private IComponentsSimulator AC;
+    private IComponentsSimulator ALU;
+    private IComponentsSimulator B;
+    private IComponentsSimulator OUT;
+    private IComponentsSimulator RESULT;
+    
 
  
     /**
@@ -22,6 +36,17 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         setSize( 800, 800 );
         setVisible( true );
+        ComponentsFactory componentsFactory = new ComponentsFactory();
+        PC = componentsFactory.getComponent("PC");
+        MAR = componentsFactory.getComponent("MAR");
+        RAM = componentsFactory.getComponent("RAM");
+        IR= componentsFactory.getComponent("IR");
+        UC= componentsFactory.getComponent("UC");
+        AC = componentsFactory.getComponent("AC");
+        ALU = componentsFactory.getComponent("ALU");
+        B = componentsFactory.getComponent("B");
+        OUT = componentsFactory.getComponent("OUT");
+        RESULT = componentsFactory.getComponent("RESULT");
     }
 
     
@@ -56,6 +81,13 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -68,10 +100,30 @@ public class NewJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+        
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(183, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(144, 144, 144))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jButton1)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        RAM.setEstadoLineasIn(!RAM.getEstadoLineasIn());
+        repaint();
+    }  
     /**
      * @param args the command line arguments
      */
@@ -108,21 +160,27 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     
     public void pintarBase(Graphics g){
+        
         buildBUS(g);
-        buildPC(g);
-        buildMAR(g);
-        buildRAM(g);
-        buildIR(g);
-        buildUC(g);
-        buildAC(g);
-        buildALU(g);
-        buildB(g);
-        buildOUT(g);
-        buildResult(g);
+        buildPC(g,PC);
+        buildMAR(g,MAR);
+        buildRAM(g,RAM);
+//        buildIR(g,IR);
+        buildUC(g,UC);
+        buildAC(g,AC);
+        buildALU(g,ALU);
+        buildB(g,B);
+        buildOUT(g,OUT);
+        buildResult(g,RESULT);
     }
     
-    public void buildLinesLeftBoardOUT(int xi, int xf, Graphics g){
+    public void buildLinesLeftBoardOUT(int xi, int xf, Graphics g, IComponentsSimulator component){
         //OuT LINE
+        if(component.getEstadoLineasOut()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         for(int i = xi+5; i <= xf-5;i = i+5){
             g.drawLine( 140, i, 230, i );
         }
@@ -132,8 +190,13 @@ public class NewJFrame extends javax.swing.JFrame {
         g.drawLine( 190, xf, 205, middle );
     }
     
-    public void buildLinesLeftBoardIN(int xi, int xf, Graphics g){
+    public void buildLinesLeftBoardIN(int xi, int xf, Graphics g, IComponentsSimulator component){
         //OuT LINE
+        if(component.getEstadoLineasIn()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         for(int i = xi+5; i <= xf-5;i = i+5){
             g.drawLine( 140, i, 230, i );
         }
@@ -144,7 +207,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     
     
-    public void buildLinesRightBoardOUT(int xi, int xf, Graphics g){
+    public void buildLinesRightBoardOUT(int xi, int xf, Graphics g, IComponentsSimulator component){
         //OuT LINE
         for(int i = xi+5; i <= xf-5;i = i+5){
             g.drawLine( 310, i, 380, i );
@@ -155,7 +218,7 @@ public class NewJFrame extends javax.swing.JFrame {
         g.drawLine( 320, middle, 335, xf );
     }
     
-    public void buildLinesRightBoardIN(int xi, int xf, Graphics g){
+    public void buildLinesRightBoardIN(int xi, int xf, Graphics g, IComponentsSimulator component){
         //OuT LINE
         for(int i = xi+5; i <= xf-5;i = i+5){
             g.drawLine( 310, i, 380, i );
@@ -196,92 +259,143 @@ public class NewJFrame extends javax.swing.JFrame {
     // End Center board
     
     // Begin left board
-    public void buildPC(Graphics g){
+    public void buildPC(Graphics g, IComponentsSimulator component){
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawString( "PC", 20, 60 );
         g.drawRect( 20, 60, 120, 60 );
         
-        buildLinesLeftBoardOUT(60,90,g);
-        buildLinesLeftBoardIN(90,120,g);
+        buildLinesLeftBoardOUT(60,90,g,component);
+        buildLinesLeftBoardIN(90,120,g,component);
     };
     
-    public void buildMAR(Graphics g){
+    public void buildMAR(Graphics g, IComponentsSimulator component){
         g.drawString("MAR", 20, 140);
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect( 20, 140, 120, 60 );
         
-        buildLinesLeftBoardOUT(140,170,g);
-        buildLinesLeftBoardIN(170,200,g);
+        buildLinesLeftBoardOUT(140,170,g,component);
+        buildLinesLeftBoardIN(170,200,g,component);
         
     };
     
-    public void buildRAM(Graphics g){
+    public void buildRAM(Graphics g, IComponentsSimulator component){
         //RAM
-        g.drawString( "RAM", 20, 220 );
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
+        g.drawString( component.getNombre(), 20, 220 );
         g.drawRect( 20, 220, 120, 60 );
-        buildLinesLeftBoardOUT(220,250,g);
-        buildLinesLeftBoardIN(250,280,g);
+        
+        buildLinesLeftBoardOUT(220,250,g,component);
+        buildLinesLeftBoardIN(250,280,g,component);
     };
     
-    public void buildIR(Graphics g){
+    public void buildIR(Graphics g, IComponentsSimulator component){
          //RI
         g.drawString( "REG. INST.", 40, 300 );
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect( 20, 300, 120, 60 );
-        buildLinesLeftBoardOUT(300,330,g);
-        buildLinesLeftBoardIN(330,360,g);
+        buildLinesLeftBoardOUT(300,330,g,component);
+        buildLinesLeftBoardIN(330,360,g,component);
     };
     
-    public void buildUC(Graphics g){
+    public void buildUC(Graphics g, IComponentsSimulator component){
          //CS
         g.drawString( "UC", 20, 380 );
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect( 20, 380, 120, 60 );
-        buildLinesLeftBoardOUT(380,410,g);
-        buildLinesLeftBoardIN(410,440,g);
+        buildLinesLeftBoardOUT(380,410,g,component);
+        buildLinesLeftBoardIN(410,440,g,component);
     };
     // End left board
     
     // Begin Rigth board
-    public void buildAC(Graphics g){
+    public void buildAC(Graphics g, IComponentsSimulator component){
         //A
         g.drawString( "A", 380, 60 );
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect(380, 60, 120, 60 );
         
-        buildLinesRightBoardOUT(60,90,g);
-        buildLinesRightBoardIN(90,120,g);
+        buildLinesRightBoardOUT(60,90,g,component);
+        buildLinesRightBoardIN(90,120,g,component);
     };
     
-    public void buildALU(Graphics g){
+    public void buildALU(Graphics g, IComponentsSimulator component){
         //ALU
         g.drawString( "ALU", 380, 140 );
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect( 380, 140, 120, 60 );
         
-        buildLinesRightBoardOUT(140,170,g);
-        buildLinesRightBoardIN(170,200,g);
+        buildLinesRightBoardOUT(140,170,g,component);
+        buildLinesRightBoardIN(170,200,g,component);
     };
     
-    public void buildB(Graphics g){
+    public void buildB(Graphics g, IComponentsSimulator component){
         //B
         g.drawString( "B", 380, 220 );
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect( 380, 220, 120, 60 );
         
-        buildLinesRightBoardOUT(220,250,g);
-        buildLinesRightBoardIN(250,280,g);
+        buildLinesRightBoardOUT(220,250,g,component);
+        buildLinesRightBoardIN(250,280,g,component);
     };
     
-    public void buildOUT(Graphics g){
+    public void buildOUT(Graphics g, IComponentsSimulator component){
         //RS
         g.drawString( "RS", 380, 300 );
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect( 380, 300, 120, 60 );
         
-        buildLinesRightBoardOUT(300,330,g);
-        buildLinesRightBoardIN(330,360,g);
+        buildLinesRightBoardOUT(300,330,g,component);
+        buildLinesRightBoardIN(330,360,g,component);
     };
     
-    public void buildResult(Graphics g){
+    public void buildResult(Graphics g, IComponentsSimulator component){
          //DISPLAY
         g.drawString( "DISPLAY", 380, 380);
+        if(component.getEstado()){
+            g.setColor(Color.red);
+        }else {
+            g.setColor(Color.black);
+        }
         g.drawRect( 380, 380, 120, 60 );
         
-        buildLinesRightBoardOUT(380,410,g);
-        buildLinesRightBoardIN(410,440,g);
+        buildLinesRightBoardOUT(380,410,g,component);
+        buildLinesRightBoardIN(410,440,g,component);
     };
     // End Rigth board
     
