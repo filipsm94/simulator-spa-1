@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.udistrital.presentacion;
+package co.edu.udistrital.estudiantes.simulatorspa.presentacion;
 
-import com.udistrital.logica.Core;
+import co.edu.udistrital.estudiantes.simulatorspa.logica.Core;
 import java.awt.Color;
 import java.awt.Graphics;
 

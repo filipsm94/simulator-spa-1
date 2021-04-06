@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.udistrital.logica;
+package co.edu.udistrital.estudiantes.simulatorspa.logica;
 
-import com.udistrital.presentacion.GUI_SAP;
+import co.edu.udistrital.estudiantes.simulatorspa.presentacion.GUI_SAP;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
