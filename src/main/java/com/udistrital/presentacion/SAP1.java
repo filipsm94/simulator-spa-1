@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.udistrital.estudiantes.simulatorspa;
+package com.udistrital.presentacion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,31 +52,7 @@ public class SAP1 {
         
         memory2();
         
-        int i=0;
-        while(i<memory.length){
-            if(memory[i]!=null){
-                if(memory[i].equals("HLT")){
-                    break;
-                }
-                String[] paso = memory[i].split(" ");
-                if(paso.length>1){
-                    System.out.println("paso "+ paso[0] +" "+paso[1]+" i:"+i);
-                    if((flag && paso[0].equals("JC")) || paso[0].equals("JMP")){
-                        i=Integer.parseInt(paso[1]);
-                    }else{
-                        paso(paso[0],Integer.parseInt(paso[1]));
-                        i++;
-                    }                    
-                }else{
-                     System.out.println("paso "+ paso[0] +" i:"+i);
-                    paso(paso[0],0);
-                    i++;
-                }
-            }else{
-                i++;
-            }
-        }
-        System.out.println("TERMINO PROGRAMA "+ A);
+        
         
     }
     
