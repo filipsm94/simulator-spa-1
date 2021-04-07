@@ -81,7 +81,7 @@ public class UtilCore {
         palabrasControl.put("JZ", aux);
         aux = new ArrayList<>();
         
-        aux.add("IO;AI");
+        aux.add("AO;OI");
         aux.add("");
         aux.add("");
         palabrasControl.put("OUT", aux);
@@ -114,7 +114,7 @@ public class UtilCore {
         memory[12]="";
         memory[13]="";*/
         memory[14]="4";
-        memory[15]="2";
+        memory[15]="8";
         return memory;
  }
  
@@ -133,7 +133,7 @@ public class UtilCore {
         memory[10]="JMP 0";
         //memory[11]="";
         memory[12]="1";
-        memory[13]="0";
+        memory[13]="3";
         memory[14]="3";
         memory[15]="5";
         return memory;

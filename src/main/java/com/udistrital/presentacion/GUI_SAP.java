@@ -116,8 +116,6 @@ public class GUI_SAP extends javax.swing.JFrame {
     public void paint(Graphics g) {
         super.paint(g);
         
-         System.out.println("com.udistrital.presentacion.GUI_SAP.paint() aquiiii");
-        
         if(sapModel.isInicia()){
            UtilFront.pintarBase(g);
         }else{
@@ -130,11 +128,9 @@ public class GUI_SAP extends javax.swing.JFrame {
     public void paintComponents(Graphics g) {
         super.paintComponents(g); //To change body of generated methods, choose Tools | Templates.
         UtilFront.pintarBase(g);
-        String instruccion=sapModel.getInstruccion();
+        String pasoControl =sapModel.getPasoControl();
         
-        System.out.println("com.udistrital.presentacion.GUI_SAP.paintComponents()"+instruccion);
-        
-        switch(instruccion) {
+        switch(pasoControl) {
             case "MI":
               UtilFront.MI(g);
               break;
@@ -167,6 +163,9 @@ public class GUI_SAP extends javax.swing.JFrame {
               break;
             case "OI":
               UtilFront.OI(g);
+              break;
+            case "OUT":
+              UtilFront.OUT(g,sapModel.getInstruccion());
               break;
             default:
               // code block

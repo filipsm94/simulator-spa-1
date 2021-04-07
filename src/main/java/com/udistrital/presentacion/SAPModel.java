@@ -13,6 +13,26 @@ public class SAPModel {
     public boolean inicia=true;
 
     public String instruccion;
+    
+    public int reloj = 0;
+    
+    public String pasoControl;
+
+    public String getPasoControl() {
+        return pasoControl;
+    }
+
+    public void setPasoControl(String pasoControl) {
+        this.pasoControl = pasoControl;
+    }
+
+    public int getReloj() {
+        return reloj;
+    }
+
+    public void setReloj(int reloj) {
+        this.reloj = reloj;
+    }
 
     public boolean isInicia() {
         return inicia;

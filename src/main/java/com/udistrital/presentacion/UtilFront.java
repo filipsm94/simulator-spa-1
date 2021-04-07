@@ -6,6 +6,7 @@
 package com.udistrital.presentacion;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -117,6 +118,12 @@ public class UtilFront {
         g.drawLine( 280, 340, 380, 340 );
     }
     
+    public static void OUT(Graphics g, String result){
+        g.setColor( Color.GREEN );
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 24)); 
+        g.drawString( result, 430, 420 );
+    }
+    
       public static void pintarBase(Graphics g){
         g.setColor( Color.BLACK );
         
@@ -153,12 +160,9 @@ public class UtilFront {
         g.drawLine( 160, 340, 260, 340 );
         
         //CS
-        g.drawString( "PC", 40, 380 );
+        g.drawString( "UC", 40, 380 );
         g.drawRect( 40, 380, 120, 60 );
-        //OUT CS
-        g.drawLine( 160, 400, 260, 400 );
-        //IN CS
-        g.drawLine( 160, 420, 260, 420 );
+        
         
         //BUS
         g.drawRect( 260, 60, 20, 380 );
@@ -198,9 +202,5 @@ public class UtilFront {
         //DISPLAY
         g.drawString( "DISPLAY", 380, 380);
         g.drawRect( 380, 380, 120, 60 );
-        //OUT DISPLAY
-        g.drawLine( 280, 400, 380, 400 );
-        //IN DISPLAY
-        g.drawLine( 280, 420, 380, 420 );
     }
 }
