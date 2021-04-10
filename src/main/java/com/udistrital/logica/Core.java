@@ -23,7 +23,7 @@ public class Core {
         int A=0;
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
-        String[] memory=UtilCore.memory2();
+        String[] memory=UtilCore.memory1();
         
         int i=0;
         while(i<memory.length){
