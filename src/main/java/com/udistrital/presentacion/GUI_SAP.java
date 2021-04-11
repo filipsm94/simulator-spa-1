@@ -391,6 +391,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
     public javax.swing.JButton start;
