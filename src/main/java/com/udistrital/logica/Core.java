@@ -34,6 +34,8 @@ public class Core {
         
         int i=0;
         while(i<memory.length){
+            String value = fillWithZerosString(Integer.toBinaryString(i+1),4);
+            s.getPC().setContenido(value);
             if(memory[i]!=null){
                 if(memory[i].equals("HLT")){
 //                    pintarPaso(palabrasControl, memory[i],sap);
@@ -41,6 +43,7 @@ public class Core {
                 }
                 String[] paso = memory[i].split(" ");
                 s.setUserControl(paso[0]);
+                
                 if(paso.length>1){
                     System.out.println("paso "+ paso[0] +" "+paso[1]+" i:"+i);
                     pintarPaso(palabrasControl,paso[0],sap,s);
@@ -69,6 +72,14 @@ public class Core {
         }
         sap.repaint();
         System.out.println("TERMINO PROGRAMA "+ A);
+    }
+    
+    public static String fillWithZerosString(String binar, int tamano){
+        String retorno = "";
+        for(int i = binar.length();i < tamano; i++){
+            retorno+="0";
+        }
+        return retorno.concat(binar);
     }
     
     public static String[] cargarRam(JTextArea ram){

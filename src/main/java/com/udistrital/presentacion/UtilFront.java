@@ -241,7 +241,9 @@ public class UtilFront {
             g.drawLine( 160, 180, 260, 180 );
         }
         
-         if(s.getPC().getEstado()){
+        
+        
+        if(s.getPC().getEstado()){
              
             g.setColor( Color.RED );
             //PC
@@ -267,7 +269,9 @@ public class UtilFront {
                 //IN PC
                 g.drawLine( 160, 260, 260, 260 );
             }
-        
+            if(!s.getPC().getContenido().equals("")){
+                g.drawString( s.getPC().getContenido(), 60, 240 );
+            }
         }else{
             g.setColor( Color.BLACK );
             //PC
@@ -277,6 +281,9 @@ public class UtilFront {
             g.drawLine( 160, 240, 260, 240 );
             //IN PC
             g.drawLine( 160, 260, 260, 260 );
+            if(!s.getPC().getContenido().equals("")){
+                g.drawString( s.getPC().getContenido(), 60, 240 );
+            }
         }
         
         if(s.getIR().getEstado()){

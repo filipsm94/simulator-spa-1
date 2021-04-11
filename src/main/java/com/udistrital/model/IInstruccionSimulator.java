@@ -32,4 +32,8 @@ public interface IInstruccionSimulator {
     
     public void setPasoControl(String paso);
     
+    public String getContenido();
+    
+    public void setContenido(String contenido);
+    
 }

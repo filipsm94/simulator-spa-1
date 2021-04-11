@@ -20,6 +20,7 @@ public class Instruccion implements IInstruccionSimulator{
     private String pasoControl;
     private boolean estadoLineasIn;
     private boolean estadoLineasOut;
+    private String contenido;
 
     public Instruccion(String nameComponent, String pasosControl) {
         this.nombre = nameComponent;
@@ -27,6 +28,7 @@ public class Instruccion implements IInstruccionSimulator{
         this.estadoLineasOut = false;
         this.estado = false;
         this.pasoControl = "";
+        this.contenido = "";
         List<String> pasos = new ArrayList<>();
         for(String paso: pasosControl.split(";")){
             pasos.add(paso);
@@ -87,5 +89,13 @@ public class Instruccion implements IInstruccionSimulator{
 
     public void setPasosControl(List<String> pasosControl) {
         this.pasosControl = pasosControl;
+    }
+    
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 }
