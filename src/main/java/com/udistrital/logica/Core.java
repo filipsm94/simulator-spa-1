@@ -6,10 +6,14 @@
 package com.udistrital.logica;
 
 import com.udistrital.presentacion.GUI_SAP;
+import java.awt.TextArea;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -19,11 +23,12 @@ public class Core {
 
     private int counter = 0;
     
-    public static void logica(GUI_SAP sap){
+    public static void logica(GUI_SAP sap, JTextArea ram){        
+        
         int A=0;
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
-        String[] memory=UtilCore.memory2();
+        String[] memory = cargarRam(ram);
         
         int i=0;
         while(i<memory.length){
@@ -61,6 +66,16 @@ public class Core {
             }
         }
         System.out.println("TERMINO PROGRAMA "+ A);
+    }
+    
+    public static String[] cargarRam(JTextArea ram){
+        String memory[] = ram.getText().split("\\r?\\n");
+        for (int i = 0; i < memory.length; i++) {
+            if(memory[i].equals("")){
+                memory[i] = "null";
+            }
+        }
+        return memory;                 
     }
     
     public static int pasoInst(String instruccion, int value,String[] memory, int A,GUI_SAP sap){
@@ -107,7 +122,7 @@ public class Core {
                 sap.sapModel.setPasoControl(inst);
                 sap.paintComponents(sap.getGraphics());
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                     
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Core.class.getName()).log(Level.SEVERE, null, ex);
