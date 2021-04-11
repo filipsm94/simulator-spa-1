@@ -5,8 +5,6 @@
  */
 package com.udistrital.model;
 
-import co.edu.udistrital.estudiantes.simulatorspa.*;
-
 /**
  *
  * @author User
