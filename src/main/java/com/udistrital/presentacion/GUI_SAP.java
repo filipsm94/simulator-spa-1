@@ -6,6 +6,7 @@
 package com.udistrital.presentacion;
 
 import com.udistrital.logica.Core;
+import com.udistrital.model.IInstruccionSimulator;
 import com.udistrital.model.Simulador;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -144,69 +145,117 @@ public class GUI_SAP extends javax.swing.JFrame {
     public void paintComponents(Graphics g, boolean bool) {
         super.paintComponents(g);
         String pasoControl =sapModel.getPasoControl();
-        
+        IInstruccionSimulator inst = null;
 //        
         switch(pasoControl) {
             case "MI":
 //              UtilFront.MI(g);
-              simulador.getMAR().setEstado(bool);
-              simulador.getMAR().setEstadoLineasIn(bool);
+                inst = simulador.getMAR();
+                inst.setEstado(bool);
+                inst.setEstadoLineasIn(bool);
+                if(inst.getPasosControl().contains("MI")){
+                    inst.setPasoControl("MI");
+                }
               break;
             case "RI":
               UtilFront.RI(g);
               break;
             case "RO":
 //              UtilFront.RO(g);
-                simulador.getRAM().setEstado(bool);
-                simulador.getRAM().setEstadoLineasOut(bool);
+                inst = simulador.getRAM();
+                inst.setEstado(bool);
+                inst.setEstadoLineasOut(bool);
+                if(inst.getPasosControl().contains("RO")){
+                    inst.setPasoControl("RO");
+                }
               break;
             case "CE":
 //              UtilFront.CE(g);
-              simulador.getPC().setEstado(bool);
-              simulador.getPC().setEstadoLineasIn(bool);
+                inst = simulador.getPC();
+                inst.setEstado(bool);
+                inst.setEstadoLineasIn(bool);
+                if(inst.getPasosControl().contains("CE")){
+                    inst.setPasoControl("CE");
+                }
               break;
             case "CO":
 //              UtilFront.CO(g);
-                simulador.getPC().setEstado(bool);
-                simulador.getPC().setEstadoLineasOut(bool);
+                inst = simulador.getPC();
+                inst.setEstado(bool);
+                inst.setEstadoLineasOut(bool);
+                if(inst.getPasosControl().contains("CO")){
+                    inst.setPasoControl("CO");
+                }
               break;
             case "II":
 //              UtilFront.II(g);
-                simulador.getIR().setEstado(bool);
-                simulador.getIR().setEstadoLineasIn(bool);
+                inst = simulador.getIR();
+                inst.setEstado(bool);
+                inst.setEstadoLineasIn(bool);
+                if(inst.getPasosControl().contains("II")){
+                    inst.setPasoControl("II");
+                }
               break;
             case "IO":
-                simulador.getIR().setEstado(bool);
-                simulador.getIR().setEstadoLineasOut(bool);
+                inst = simulador.getIR();
+                inst.setEstado(bool);
+                inst.setEstadoLineasOut(bool);
+                if(inst.getPasosControl().contains("IO")){
+                    inst.setPasoControl("IO");
+                }
 //              UtilFront.IO(g);
               break;
             case "AI":
-                simulador.getAC().setEstado(bool);
-                simulador.getAC().setEstadoLineasIn(bool);
+                inst = simulador.getAC();
+                inst.setEstado(bool);
+                inst.setEstadoLineasIn(bool);
+                if(inst.getPasosControl().contains("AI")){
+                    inst.setPasoControl("AI");
+                }
 //              UtilFront.AI(g);
               break;
             case "AO":
-                simulador.getAC().setEstado(bool);
-                simulador.getAC().setEstadoLineasOut(bool);
+                inst = simulador.getAC();
+                inst.setEstado(bool);
+                inst.setEstadoLineasOut(bool);
+                if(inst.getPasosControl().contains("AO")){
+                    inst.setPasoControl("AO");
+                }
 //              UtilFront.AO(g);
               break;
             case "EO":
-                simulador.getALU().setEstado(bool);
-                simulador.getALU().setEstadoLineasOut(bool);
+                inst = simulador.getALU();
+                inst.setEstado(bool);
+                inst.setEstadoLineasOut(bool);
+                if(inst.getPasosControl().contains("EO")){
+                    inst.setPasoControl("EO");
+                }
 //              UtilFront.EO(g);
               break;
             case "SU":
-                simulador.getALU().setEstado(bool);
-                UtilFront.SU(g);
+                inst = simulador.getALU();
+                inst.setEstado(bool);
+                if(inst.getPasosControl().contains("SU")){
+                    inst.setPasoControl("SU");
+                }
+//                UtilFront.SU(g);
               break;
             case "BI":
-                simulador.getB().setEstado(bool);
-                simulador.getB().setEstadoLineasIn(bool);
+                inst = simulador.getB();
+                inst.setEstado(bool);
+                inst.setEstadoLineasIn(bool);
+                if(inst.getPasosControl().contains("BI")){
+                    inst.setPasoControl("BI");
+                }
 //              UtilFront.BI(g);
               break;
             case "OI":
-                simulador.getRESULT().setEstado(bool);
-                simulador.getRESULT().setEstadoLineasOut(bool);
+                inst = simulador.getRESULT();
+                inst.setEstado(bool);
+                inst.setEstadoLineasOut(bool);
+                if(inst.getPasosControl().contains("OI")){
+                    inst.setPasoControl("OI");
+                }
 //              UtilFront.OI(g);
               break;
             case "J":
@@ -217,6 +266,7 @@ public class GUI_SAP extends javax.swing.JFrame {
               break;
             case "OUT":
               UtilFront.OUT(g,sapModel.getInstruccion());
+              simulador.setDisplay(sapModel.getInstruccion());
               break;
             default:
               // code block

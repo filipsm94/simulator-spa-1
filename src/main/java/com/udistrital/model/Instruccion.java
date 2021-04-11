@@ -17,23 +17,16 @@ public class Instruccion implements IInstruccionSimulator{
     private String nombre;
     private boolean estado;
     private List<String> pasosControl;
+    private String pasoControl;
     private boolean estadoLineasIn;
     private boolean estadoLineasOut;
 
-    public List<String> getPasosControl() {
-        return pasosControl;
-    }
-
-    public void setPasosControl(List<String> pasosControl) {
-        this.pasosControl = pasosControl;
-    }
-
-    
     public Instruccion(String nameComponent, String pasosControl) {
         this.nombre = nameComponent;
         this.estadoLineasIn = false;
         this.estadoLineasOut = false;
         this.estado = false;
+        this.pasoControl = "";
         List<String> pasos = new ArrayList<>();
         for(String paso: pasosControl.split(";")){
             pasos.add(paso);
@@ -75,5 +68,24 @@ public class Instruccion implements IInstruccionSimulator{
     @Override
     public void setEstadoLineasOut(boolean estadoLineasOut) {
         this.estadoLineasOut = estadoLineasOut;
+    }
+    
+    @Override
+    public String getPasoControl() {
+        return pasoControl;
+    }
+
+    @Override
+    public void setPasoControl(String pasoControl) {
+        this.pasoControl = pasoControl;
+    }
+
+    @Override
+    public List<String> getPasosControl() {
+        return pasosControl;
+    }
+
+    public void setPasosControl(List<String> pasosControl) {
+        this.pasosControl = pasosControl;
     }
 }

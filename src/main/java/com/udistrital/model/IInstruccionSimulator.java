@@ -5,6 +5,8 @@
  */
 package com.udistrital.model;
 
+import java.util.List;
+
 /**
  *
  * @author User
@@ -23,5 +25,11 @@ public interface IInstruccionSimulator {
     public boolean getEstadoLineasOut(); 
 
     public void setEstadoLineasOut(boolean estadoLineasOut);
+    
+    public List<String> getPasosControl();
+    
+    public String getPasoControl();
+    
+    public void setPasoControl(String paso);
     
 }

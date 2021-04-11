@@ -26,8 +26,10 @@ public class Simulador {
     private IInstruccionSimulator ALU;
     private IInstruccionSimulator B;
     private IInstruccionSimulator OUT;
-    private IInstruccionSimulator RESULT;    
-    
+    private IInstruccionSimulator RESULT; 
+    private String display;
+    private String userControl;
+
     private Simulador(){
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
         PC = new Instruccion("PC","CE;CO;CJ");
@@ -40,7 +42,8 @@ public class Simulador {
         B = new Instruccion("B","BI;BO");
         OUT = new Instruccion("OUT","OI");
         RESULT = new Instruccion("RESULT","");
-        
+        display = "";
+        userControl = "";
     }
     
     public static Simulador getInstance(){
@@ -129,4 +132,21 @@ public class Simulador {
     public void setRESULT(IInstruccionSimulator RESULT) {
         this.RESULT = RESULT;
     }
+    
+    public String getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(String display) {
+        this.display = display;
+    }
+
+    public String getUserControl() {
+        return userControl;
+    }
+
+    public void setUserControl(String userControl) {
+        this.userControl = userControl;
+    }
+    
 }

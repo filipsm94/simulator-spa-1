@@ -34,9 +34,9 @@ public class Core {
                     break;
                 }
                 String[] paso = memory[i].split(" ");
+                s.setUserControl(paso[0]);
                 if(paso.length>1){
                     System.out.println("paso "+ paso[0] +" "+paso[1]+" i:"+i);
-                    
                     pintarPaso(palabrasControl,paso[0],sap,s);
                     
                     if((flag && paso[0].equals("JC")) || paso[0].equals("JMP")){
@@ -85,7 +85,7 @@ public class Core {
               System.out.println("OUT "+ A);
               sap.sapModel.setPasoControl("OUT");
               sap.sapModel.setInstruccion(A+"");
-              sap.paintComponents(sap.getGraphics());
+              sap.paintComponents(sap.getGraphics(),true);
               break;
             case "HLT":
               break;
