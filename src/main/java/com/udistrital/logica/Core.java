@@ -5,6 +5,7 @@
  */
 package com.udistrital.logica;
 
+import com.udistrital.model.Simulador;
 import com.udistrital.presentacion.GUI_SAP;
 import java.awt.TextArea;
 import java.util.ArrayList;
@@ -23,8 +24,7 @@ public class Core {
 
     private int counter = 0;
     
-    public static void logica(GUI_SAP sap, JTextArea ram){        
-        
+    public static void logica(GUI_SAP sap, Simulador s, JTextArea ram){
         int A=0;
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
@@ -40,10 +40,10 @@ public class Core {
                     break;
                 }
                 String[] paso = memory[i].split(" ");
+                s.setUserControl(paso[0]);
                 if(paso.length>1){
                     System.out.println("paso "+ paso[0] +" "+paso[1]+" i:"+i);
-                    
-                    pintarPaso(palabrasControl,paso[0],sap);
+                    pintarPaso(palabrasControl,paso[0],sap,s);
                     
                     if((flag && paso[0].equals("JC")) || paso[0].equals("JMP")){
                         i=Integer.parseInt(paso[1]);
@@ -58,7 +58,7 @@ public class Core {
                 }else{
                     System.out.println("paso "+ paso[0] +" i:"+i);
                     if(paso[0].equals("OUT")){
-                        pintarPaso(palabrasControl,paso[0],sap);
+                        pintarPaso(palabrasControl,paso[0],sap,s);
                     }
                     A=pasoInst(paso[0],0,memory,A,sap);
                     i++;
@@ -67,6 +67,7 @@ public class Core {
                 i++;
             }
         }
+        sap.repaint();
         System.out.println("TERMINO PROGRAMA "+ A);
     }
     
@@ -100,7 +101,7 @@ public class Core {
               System.out.println("OUT "+ A);
               sap.sapModel.setPasoControl("OUT");
               sap.sapModel.setInstruccion(A+"");
-              sap.paintComponents(sap.getGraphics());
+              sap.paintComponents(sap.getGraphics(),true);
               break;
             case "HLT":
               break;
@@ -112,7 +113,7 @@ public class Core {
     }
     
     
-    public static void pintarPaso(HashMap<String,List<String>> palabrasControl,String instruccion,GUI_SAP sap){
+    public static void pintarPaso(HashMap<String,List<String>> palabrasControl,String instruccion,GUI_SAP sap, Simulador s){
         List<String> pasoViewFetch=palabrasControl.get("FETCH");
         List<String> pasoView= palabrasControl.get(instruccion);
         System.out.println("Instruccion : "+instruccion);
@@ -122,13 +123,20 @@ public class Core {
                 System.out.println("itera : "+inst);
                 
                 sap.sapModel.setPasoControl(inst);
-                sap.paintComponents(sap.getGraphics());
+                
+                
+                sap.paintComponents(sap.getGraphics(),true);
+//                sap.changeComponents(true);
+//                sap.repaint();
                 try {
                     Thread.sleep(100);
                     
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Core.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                sap.paintComponents(sap.getGraphics(),false);
+//                sap.changeComponents(false);
+//                sap.repaint();
             }
             sap.sapModel.setReloj(sap.sapModel.getReloj()+1);
             System.out.println("CICLO DE RELOJ"+(sap.sapModel.getReloj()));
@@ -138,13 +146,16 @@ public class Core {
                 System.out.println("itera : "+inst);
                 
                 sap.sapModel.setPasoControl(inst);
-                sap.paintComponents(sap.getGraphics());
+                sap.paintComponents(sap.getGraphics(),true);
+//                sap.repaint();
+//                sap.paintComponents(sap.getGraphics());
                 try {
                     Thread.sleep(500);
                     
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Core.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                sap.paintComponents(sap.getGraphics(),false);
             }
             sap.sapModel.setReloj(sap.sapModel.getReloj()+1);
             System.out.println("CICLO DE RELOJ"+(sap.sapModel.getReloj()));
