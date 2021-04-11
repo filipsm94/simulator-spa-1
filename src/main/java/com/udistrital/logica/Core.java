@@ -28,7 +28,7 @@ public class Core {
         int A=0;
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
-
+        s.resetValues();
         String[] memory = cargarRam(ram);
 
         
@@ -124,19 +124,14 @@ public class Core {
                 
                 sap.sapModel.setPasoControl(inst);
                 
-                
                 sap.paintComponents(sap.getGraphics(),true);
-//                sap.changeComponents(true);
-//                sap.repaint();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                     
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Core.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 sap.paintComponents(sap.getGraphics(),false);
-//                sap.changeComponents(false);
-//                sap.repaint();
             }
             sap.sapModel.setReloj(sap.sapModel.getReloj()+1);
             System.out.println("CICLO DE RELOJ"+(sap.sapModel.getReloj()));
@@ -147,8 +142,6 @@ public class Core {
                 
                 sap.sapModel.setPasoControl(inst);
                 sap.paintComponents(sap.getGraphics(),true);
-//                sap.repaint();
-//                sap.paintComponents(sap.getGraphics());
                 try {
                     Thread.sleep(500);
                     

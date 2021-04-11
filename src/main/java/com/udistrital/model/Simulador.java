@@ -148,5 +148,9 @@ public class Simulador {
     public void setUserControl(String userControl) {
         this.userControl = userControl;
     }
-    
+
+    public void resetValues(){
+        setUserControl("");
+        setDisplay("");
+    }
 }
