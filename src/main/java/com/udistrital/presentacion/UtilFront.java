@@ -16,13 +16,6 @@ import java.awt.Graphics;
  */
 public class UtilFront {
     
-    public static void MI(Graphics g){
-        g.setColor( Color.RED );
-        g.drawString( "MI", 45, 525);
-        g.fillRect(45, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 50, 542);
-    }
     
     public static void RI(Graphics g){
         g.setColor( Color.RED );
@@ -34,120 +27,13 @@ public class UtilFront {
        
     }
     
-    public static void RO(Graphics g){
-        g.setColor( Color.RED );       
-        g.drawString( "RO", 85, 525);
-        g.fillRect( 85, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 90, 542);
-       
-    }
-    
-    public static void CE(Graphics g){
-        g.setColor( Color.RED );
-        // CE
-        g.drawString( "CE", 265, 525);
-        g.fillRect( 265, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 270, 542);
-    }
-     
-    public static void CO(Graphics g){
-        g.setColor( Color.RED );
-        // CO
-        g.drawString( "CO", 285, 525);
-        g.fillRect( 285, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 290, 542);
-        
-    }
-    
-    public static void II(Graphics g){
-        g.setColor( Color.RED );
-        // II
-        g.drawString( "II", 125, 525);
-        g.fillRect( 125, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 130, 542);
-    }
-    
-    public static void IO(Graphics g){
-        g.setColor( Color.RED );
-        g.drawString( "IO", 105, 525);
-        g.fillRect( 105, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 110, 542);
-    }
-    
-    public static void AI(Graphics g){
-        g.setColor( Color.RED );
-        // AI
-        g.drawString( "AI", 145, 525);
-        g.fillRect( 145, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 150, 542);
-    }
-    
-    public static void AO(Graphics g){
-        g.setColor( Color.RED );
-        // AO
-        g.drawString( "AO", 165, 525);
-        g.fillRect( 165, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 170, 542);
-       
-    }
-    
-    public static void EO(Graphics g){
-        g.setColor( Color.RED );
-
-        // SO
-        g.drawString( "SO", 185, 525);
-        g.fillRect( 185, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 190, 542);
-    }
-    
-    public static void SU(Graphics g){
-        g.setColor( Color.RED );        
-        // SU
-        g.drawString( "SU", 205, 525);
-        g.drawRect( 205, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 210, 542);
-       
-    }
-    
-    public static void BI(Graphics g){
-        g.setColor( Color.RED );
-        // BI
-        g.drawString( "BI", 225, 525);
-        g.fillRect( 225, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 230, 542);
-        
-    }
-    
-    public static void OI(Graphics g){
-        g.setColor( Color.RED );
-
-        // OI
-        g.drawString( "OI", 245, 525);
-        g.fillRect( 245, 530, 15, 15 );
-        g.setColor( Color.WHITE );
-        g.drawString( "1", 250, 542);
-    }
-    
     public static void J(Graphics g){
         g.setColor( Color.RED );
         // J
         g.drawString( "J", 305, 525);
         g.fillRect( 305, 530, 15, 15 );
         g.setColor( Color.WHITE );
-        g.drawString( "1", 310, 542);
-        
-       
-       
+        g.drawString( "1", 310, 542); 
     }
     
     public static void FI(Graphics g){
@@ -157,7 +43,6 @@ public class UtilFront {
         g.fillRect( 325, 530, 15, 15 );
         g.setColor( Color.WHITE );
         g.drawString( "1", 330, 542);
-       
     }
     
     public static void OUT(Graphics g, String result){
@@ -166,7 +51,7 @@ public class UtilFront {
         g.drawString( result, 430, 420 );
     }
     
-    public static void pintarBase(Graphics g, Simulador s){
+    private static void paintMAR(Graphics g, Simulador s){
         //MAR
         if(s.getMAR().getEstado()){
             g.setColor( Color.RED );
@@ -202,8 +87,10 @@ public class UtilFront {
             //IN MAR
             g.drawLine( 160, 100, 260, 100 );
         }
-            
-        
+    }
+    
+    private static void paintRAM(Graphics g, Simulador s){
+
         if(s.getRAM().getEstado()){
             g.setColor( Color.RED );
             //RAM
@@ -246,9 +133,9 @@ public class UtilFront {
                 g.drawString( s.getRAM().getContenido(8), 60, 160 );
             }
         }
-        
-        
-        
+    }
+    
+    private static void paintPC(Graphics g, Simulador s){
         if(s.getPC().getEstado()){
              
             g.setColor( Color.RED );
@@ -291,7 +178,9 @@ public class UtilFront {
                 g.drawString( s.getPC().getContenido(4), 60, 240 );
             }
         }
-        
+    }
+    
+    private static void paintIR(Graphics g, Simulador s){
         if(s.getIR().getEstado()){
             g.setColor( Color.RED );
             //RI
@@ -328,12 +217,9 @@ public class UtilFront {
             //IN RI
             g.drawLine( 160, 340, 260, 340 );
         }
-        
-        //BUS
-        g.setColor( Color.BLACK );
-        g.drawRect( 260, 60, 20, 380 );
-        
-        
+    }
+    
+    private static void paintAC(Graphics g, Simulador s){
         if(s.getAC().getEstado()){
             g.setColor( Color.RED );
             //A
@@ -370,9 +256,9 @@ public class UtilFront {
             //IN A
             g.drawLine( 280, 100, 380, 100 );
         }
-        
-        
-        
+    }
+    
+    private static void paintALU(Graphics g, Simulador s){
         if(s.getALU().getEstado()){
             g.setColor( Color.RED );
             //ALU
@@ -409,9 +295,9 @@ public class UtilFront {
             //IN ALU
             g.drawLine( 280, 180, 380, 180 );
         }
-        
-        
-        
+    }
+    
+    private static void paintB(Graphics g, Simulador s){
         if(s.getB().getEstado()){
             g.setColor( Color.RED );
             //B
@@ -448,9 +334,9 @@ public class UtilFront {
             //IN B
             g.drawLine( 280, 260, 380, 260 );
         }
-        
-        
-        
+    }
+    
+    private static void paintRS(Graphics g, Simulador s){
         if(s.getRESULT().getEstado()){
              g.setColor( Color.RED );
             //RS
@@ -487,6 +373,22 @@ public class UtilFront {
             //IN RS
             g.drawLine( 280, 340, 380, 340 );
         }
+    }
+    
+    public static void pintarBase(Graphics g, Simulador s){
+        paintMAR(g,s);
+        paintRAM(g,s);
+        paintPC(g,s);
+        paintIR(g,s);
+        paintAC(g,s);
+        paintALU(g,s);
+        paintB(g,s);
+        paintRS(g,s);
+        
+        
+        //BUS
+        g.setColor( Color.BLACK );
+        g.drawRect( 260, 60, 20, 380 );
         
         
         

@@ -211,10 +211,9 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
         super.paintComponents(g);
         String pasoControl =sapModel.getPasoControl();
         IInstruccionSimulator inst = null;
-//        
+        
         switch(pasoControl) {
             case "MI":
-//              UtilFront.MI(g);
                 inst = simulador.getMAR();
                 inst.setEstado(bool);
                 inst.setEstadoLineasIn(bool);
@@ -227,7 +226,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
               UtilFront.RI(g);
               break;
             case "RO":
-//              UtilFront.RO(g);
                 inst = simulador.getRAM();
                 inst.setEstado(bool);
                 inst.setEstadoLineasOut(bool);
@@ -237,7 +235,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 }
               break;
             case "CE":
-//              UtilFront.CE(g);
                 inst = simulador.getPC();
                 inst.setEstado(bool);
                 inst.setEstadoLineasIn(bool);
@@ -246,7 +243,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 }
               break;
             case "CO":
-//              UtilFront.CO(g);
                 inst = simulador.getPC();
                 inst.setEstado(bool);
                 inst.setEstadoLineasOut(bool);
@@ -255,7 +251,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 }
               break;
             case "II":
-//              UtilFront.II(g);
                 inst = simulador.getIR();
                 inst.setEstado(bool);
                 inst.setEstadoLineasIn(bool);
@@ -270,7 +265,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("IO")){
                     inst.setPasoControl("IO");
                 }
-//              UtilFront.IO(g);
               break;
             case "AI":
                 inst = simulador.getAC();
@@ -279,7 +273,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("AI")){
                     inst.setPasoControl("AI");
                 }
-//              UtilFront.AI(g);
               break;
             case "AO":
                 inst = simulador.getAC();
@@ -288,7 +281,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("AO")){
                     inst.setPasoControl("AO");
                 }
-//              UtilFront.AO(g);
               break;
             case "EO":
                 inst = simulador.getALU();
@@ -297,7 +289,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("EO")){
                     inst.setPasoControl("EO");
                 }
-//              UtilFront.EO(g);
               break;
             case "SU":
                 inst = simulador.getALU();
@@ -305,7 +296,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("SU")){
                     inst.setPasoControl("SU");
                 }
-//                UtilFront.SU(g);
               break;
             case "BI":
                 inst = simulador.getB();
@@ -314,7 +304,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("BI")){
                     inst.setPasoControl("BI");
                 }
-//              UtilFront.BI(g);
               break;
             case "OI":
                 inst = simulador.getRESULT();
@@ -323,7 +312,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("OI")){
                     inst.setPasoControl("OI");
                 }
-//              UtilFront.OI(g);
               break;
             case "J":
               UtilFront.J(g);
