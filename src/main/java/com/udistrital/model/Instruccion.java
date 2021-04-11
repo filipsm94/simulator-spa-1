@@ -20,7 +20,9 @@ public class Instruccion implements IInstruccionSimulator{
     private String pasoControl;
     private boolean estadoLineasIn;
     private boolean estadoLineasOut;
-    private String contenido;
+    private int contenido;
+    private boolean convert;
+    private String contenidoString;
 
     public Instruccion(String nameComponent, String pasosControl) {
         this.nombre = nameComponent;
@@ -28,12 +30,14 @@ public class Instruccion implements IInstruccionSimulator{
         this.estadoLineasOut = false;
         this.estado = false;
         this.pasoControl = "";
-        this.contenido = "";
+        this.contenido = 0;
         List<String> pasos = new ArrayList<>();
         for(String paso: pasosControl.split(";")){
             pasos.add(paso);
         }
         this.pasosControl = pasos;
+        this.convert=false;
+        this.contenidoString = "";
     }
     
 
@@ -92,11 +96,14 @@ public class Instruccion implements IInstruccionSimulator{
     }
     
     public String getContenido(int tamano) {
-        return fillWithZerosString(contenido, tamano);
+        return fillWithZerosString(Integer.toBinaryString(contenido), tamano);
+    }
+    public int getContenido() {
+        return this.contenido;
     }
 
     public void setContenido(Integer contenido) {
-        this.contenido = Integer.toBinaryString(contenido);
+        this.contenido = contenido;
     }
     
     public static String fillWithZerosString(String binar, int tamano){
@@ -105,5 +112,25 @@ public class Instruccion implements IInstruccionSimulator{
             retorno+="0";
         }
         return retorno.concat(binar);
+    }
+
+    @Override
+    public boolean getConvert() {
+        return this.convert;
+    }
+
+    @Override
+    public void setConvert(boolean convert) {
+        this.convert=convert;
+    }
+
+    @Override
+    public void setContenidoString(String contenidoString) {
+        this.contenidoString= contenidoString;
+    }
+
+    @Override
+    public String getContenidoString() {
+        return this.contenidoString;
     }
 }

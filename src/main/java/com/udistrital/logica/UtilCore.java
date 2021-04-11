@@ -21,7 +21,7 @@ public class UtilCore {
         List<String> aux = new ArrayList<>();
         
         aux.add("CO;MI");
-        aux.add("RO;II;CE");
+        aux.add("CE;RO;II");
         palabrasControl.put("FETCH", aux);
         aux = new ArrayList<>();
         

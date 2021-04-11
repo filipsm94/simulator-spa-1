@@ -77,6 +77,9 @@ public class UtilFront {
             //IN MAR
             g.drawLine( 160, 100, 260, 100 );
         }
+        if(!s.getMAR().getContenido(4).equals("")){
+                g.drawString( s.getMAR().getContenido(4), 60, 100 );
+            }
     }
     
     private static void paintRAM(Graphics g, Simulador s){
@@ -202,6 +205,9 @@ public class UtilFront {
             //IN RI
             g.drawLine( 160, 340, 260, 340 );
         }
+         if(!s.getIR().getContenido(8).equals("")){
+                g.drawString( s.getIR().getContenido(8), 60, 320 );
+            }
     }
     
     private static void paintAC(Graphics g, Simulador s){
@@ -243,6 +249,10 @@ public class UtilFront {
             //IN A
             g.drawLine( 280, 100, 380, 100 );
         }
+        
+        if(!s.getAC().getContenido(8).equals("")){
+                g.drawString( s.getAC().getContenido(8), 400, 90 );
+            }
     }
     
     private static void paintALU(Graphics g, Simulador s){
@@ -271,6 +281,9 @@ public class UtilFront {
             //OUT ALU
             g.drawLine( 280, 160, 380, 160 );
         }
+        if(!s.getALU().getContenidoString().equals("")){
+                g.drawString( s.getALU().getContenidoString(), 400, 170 );
+            }
     }
     
     private static void paintB(Graphics g, Simulador s){
@@ -300,6 +313,9 @@ public class UtilFront {
             //IN B
             g.drawLine( 280, 260, 380, 260 );
         }
+        if(!s.getB().getContenido(8).equals("")){
+                g.drawString( s.getB().getContenido(8), 400, 250 );
+            }
     }
     
     private static void paintRS(Graphics g, Simulador s){

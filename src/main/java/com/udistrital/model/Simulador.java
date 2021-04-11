@@ -29,7 +29,7 @@ public class Simulador {
     private IInstruccionSimulator RESULT; 
     private String display;
     private String userControl;
-    private String bus;
+    private int bus;
     private String[] binRAM; 
 
     private Simulador(){
@@ -46,7 +46,7 @@ public class Simulador {
         RESULT = new Instruccion("RESULT","");
         display = "";
         userControl = "";
-        bus = "";
+        bus = 0;
         binRAM = null;
     }
     
@@ -153,11 +153,11 @@ public class Simulador {
         this.userControl = userControl;
     }
 
-    public String getBus() {
+    public int getBus() {
         return bus;
     }
 
-    public void setBus(String bus) {
+    public void setBus(int bus) {
         this.bus = bus;
     }
 

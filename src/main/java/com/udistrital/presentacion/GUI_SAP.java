@@ -207,7 +207,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
     
     
     
-    public void paintComponents(Graphics g, boolean bool, String valor) {
+    public void paintComponents(Graphics g, boolean bool, String[] paso,int i) {
         super.paintComponents(g);
         String pasoControl =sapModel.getPasoControl();
         IInstruccionSimulator inst = null;
@@ -217,22 +217,30 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 inst = simulador.getMAR();
                 inst.setEstado(bool);
                 inst.setEstadoLineasIn(bool);
-                inst.setContenido(Integer.parseInt(valor));
+                inst.setContenido(Integer.parseInt(paso[1]));
                 if(inst.getPasosControl().contains("MI")){
                     inst.setPasoControl("MI");
                 }
+                inst.setContenido(simulador.getBus());
               break;
             case "RI":
               UtilFront.RI(g);
+              inst = simulador.getRAM();
+              inst.setContenido(simulador.getBus());
+              Core.memory[Integer.parseInt(paso[1])]=""+simulador.getBus();
               break;
             case "RO":
                 inst = simulador.getRAM();
                 inst.setEstado(bool);
                 inst.setEstadoLineasOut(bool);
-                inst.setContenido(Integer.parseInt(valor));
+                if(!inst.getConvert()){
+                    inst.setContenido(Integer.parseInt(paso[1]));
+                }
                 if(inst.getPasosControl().contains("RO")){
                     inst.setPasoControl("RO");
                 }
+               simulador.setBus(inst.getContenido());
+               
               break;
             case "CE":
                 inst = simulador.getPC();
@@ -241,6 +249,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("CE")){
                     inst.setPasoControl("CE");
                 }
+                inst.setContenido(i);
               break;
             case "CO":
                 inst = simulador.getPC();
@@ -249,6 +258,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("CO")){
                     inst.setPasoControl("CO");
                 }
+                simulador.setBus(inst.getContenido());
               break;
             case "II":
                 inst = simulador.getIR();
@@ -257,6 +267,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("II")){
                     inst.setPasoControl("II");
                 }
+                inst.setContenido(simulador.getBus());
               break;
             case "IO":
                 inst = simulador.getIR();
@@ -265,6 +276,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("IO")){
                     inst.setPasoControl("IO");
                 }
+                simulador.setBus(inst.getContenido());
               break;
             case "AI":
                 inst = simulador.getAC();
@@ -273,6 +285,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("AI")){
                     inst.setPasoControl("AI");
                 }
+                inst.setContenido(simulador.getBus());
               break;
             case "AO":
                 inst = simulador.getAC();
@@ -281,6 +294,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("AO")){
                     inst.setPasoControl("AO");
                 }
+                simulador.setBus(inst.getContenido());
               break;
             case "EO":
                 inst = simulador.getALU();
@@ -289,6 +303,14 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("EO")){
                     inst.setPasoControl("EO");
                 }
+                if(paso[0].equals("ADD")){
+                    inst.setContenidoString(""+simulador.getAC().getContenido()+" + "+simulador.getB().getContenido()+" = " + (simulador.getAC().getContenido()+simulador.getB().getContenido()));            
+                    simulador.setBus((simulador.getAC().getContenido()+simulador.getB().getContenido()));
+                }else if(paso[0].equals("SUB")){
+                    inst.setContenidoString(""+simulador.getAC().getContenido()+" - "+simulador.getB().getContenido()+" = " + (simulador.getAC().getContenido()-simulador.getB().getContenido()));            
+                    simulador.setBus((simulador.getAC().getContenido()-simulador.getB().getContenido()));
+                }
+                
               break;
             case "SU":
                 inst = simulador.getALU();
@@ -304,6 +326,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("BI")){
                     inst.setPasoControl("BI");
                 }
+                inst.setContenido(simulador.getBus());
               break;
             case "OI":
                 inst = simulador.getRESULT();
@@ -312,6 +335,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("OI")){
                     inst.setPasoControl("OI");
                 }
+                inst.setContenido(simulador.getBus());
               break;
             case "J":
               UtilFront.J(g);
@@ -326,6 +350,8 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
             default:
               // code block
           }
+        
+        System.out.println("BUS: "+ simulador.getBus());
         
         UtilFront.pintarBase(g,simulador);
     }

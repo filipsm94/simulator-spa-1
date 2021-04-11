@@ -34,6 +34,15 @@ public interface IInstruccionSimulator {
     
     public String getContenido(int tamano);
     
+    public int getContenido();
+    
     public void setContenido(Integer contenido);
     
+    public void setContenidoString(String contenidoString);
+    
+     public String getContenidoString();
+    
+    public boolean getConvert();
+    
+    public void setConvert(boolean convert);
 }
