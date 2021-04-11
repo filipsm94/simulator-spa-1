@@ -28,7 +28,9 @@ public class Core {
         int A=0;
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
+
         String[] memory = cargarRam(ram);
+
         
         int i=0;
         while(i<memory.length){

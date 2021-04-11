@@ -161,6 +161,9 @@ public class GUI_SAP extends javax.swing.JFrame {
             case "MI":
               UtilFront.MI(g);
               break;
+            case "RI":
+              UtilFront.RI(g);
+              break;
             case "RO":
               UtilFront.RO(g);
               break;
@@ -185,11 +188,20 @@ public class GUI_SAP extends javax.swing.JFrame {
             case "EO":
               UtilFront.EO(g);
               break;
+            case "SU":
+              UtilFront.SU(g);
+              break;
             case "BI":
               UtilFront.BI(g);
               break;
             case "OI":
               UtilFront.OI(g);
+              break;
+            case "J":
+              UtilFront.J(g);
+              break;
+            case "FI":
+              UtilFront.FI(g);
               break;
             case "OUT":
               UtilFront.OUT(g,sapModel.getInstruccion());
