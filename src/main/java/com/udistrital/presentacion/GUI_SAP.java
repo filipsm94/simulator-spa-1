@@ -69,7 +69,7 @@ public class GUI_SAP extends javax.swing.JFrame {
 
         jLabel2.setText("Ingresa Los datos ejem:");
 
-        jLabel4.setText("<html>01 :<p>02 :<p>03 :<p>04 :<p>05 :<p>06 :<p>07 :<p>08 :<p>09 :<p>10 :<p>11 :<p>12 :<p>13 :<p>14 :<p>15 :<p>16 :<html>");
+        jLabel4.setText("<html>00 :<p>01 :<p>02 :<p>03 :<p>04 :<p>05 :<p>06 :<p>07 :<p>08 :<p>09 :<p>10 :<p>11 :<p>12 :<p>13 :<p>14 :<p>15 :<html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
