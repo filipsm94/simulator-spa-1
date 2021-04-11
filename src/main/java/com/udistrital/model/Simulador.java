@@ -29,6 +29,7 @@ public class Simulador {
     private IInstruccionSimulator RESULT; 
     private String display;
     private String userControl;
+    private String[] binRAM; 
 
     private Simulador(){
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
@@ -44,6 +45,7 @@ public class Simulador {
         RESULT = new Instruccion("RESULT","");
         display = "";
         userControl = "";
+        binRAM = null;
     }
     
     public static Simulador getInstance(){
@@ -147,6 +149,14 @@ public class Simulador {
 
     public void setUserControl(String userControl) {
         this.userControl = userControl;
+    }
+
+    public String[] getBinRAM() {
+        return binRAM;
+    }
+
+    public void setBinRAM(String[] binRAM) {
+        this.binRAM = binRAM;
     }
 
     public void resetValues(){

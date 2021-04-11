@@ -138,4 +138,12 @@ public class UtilCore {
         memory[15]="5";
         return memory;
  }
+ 
+ public static String fillWithZerosString(String binar, int tamano){
+        String retorno = "";
+        for(int i = binar.length();i < tamano; i++){
+            retorno+="0";
+        }
+        return retorno.concat(binar);
+    }
 }

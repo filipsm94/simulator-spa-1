@@ -7,8 +7,6 @@ package com.udistrital.logica;
 
 import com.udistrital.model.Simulador;
 import com.udistrital.presentacion.GUI_SAP;
-import java.awt.TextArea;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +27,8 @@ public class Core {
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
         s.resetValues();
-        String[] memory = cargarRam(ram);
+        String[] memory = cargarRam(ram, s);
+        System.out.println("Ram en binarios" + Arrays.asList(s.getBinRAM()));
 
         
         int i=0;
@@ -75,13 +74,45 @@ public class Core {
     
     
     
-    public static String[] cargarRam(JTextArea ram){
+    public static String[] cargarRam(JTextArea ram, Simulador s){
         String memory[] = ram.getText().split("\\r?\\n");
+        String memoryBin[] = ram.getText().split("\\r?\\n");
+        Constans constant = new Constans();
+        
         for (int i = 0; i < memory.length; i++) {
             if(memory[i].equals("")){
                 memory[i] = "null";
+                memoryBin[i] = constant.NOP + constant.NOP;
+            }else {
+                String[] instruccion = memory[i].split(" ");
+                switch(instruccion[0]) {                    
+                    case "NOP":                    
+                        memoryBin[i] = constant.LDA + UtilCore.fillWithZerosString(Integer.toBinaryString(new Integer(instruccion[1])), 4);
+                        break;
+                    case "LDA":
+                        memoryBin[i] = constant.LDA + UtilCore.fillWithZerosString(Integer.toBinaryString(new Integer(instruccion[1])), 4);
+                        break;
+                    case "ADD":
+                        memoryBin[i] = constant.ADD + UtilCore.fillWithZerosString(Integer.toBinaryString(new Integer(instruccion[1])), 4);
+                        break;
+                    case "SUB":
+                        memoryBin[i] = constant.SUB + UtilCore.fillWithZerosString(Integer.toBinaryString(new Integer(instruccion[1])), 4);
+                        break;
+                    case "STA":
+                        memoryBin[i] = constant.STA + UtilCore.fillWithZerosString(Integer.toBinaryString(new Integer(instruccion[1])), 4);
+                        break;
+                    case "OUT":
+                        memoryBin[i] = constant.OUT + constant.NOP;
+                        break;
+                    case "HLT":
+                        memoryBin[i] = constant.HLT + constant.NOP;
+                        break;                 
+                    default:
+                        memoryBin[i] = constant.NOP + UtilCore.fillWithZerosString(Integer.toBinaryString(new Integer(instruccion[0])), 4);
+              }
             }
         }
+        s.setBinRAM(memoryBin);
         return memory;                 
     }
     
