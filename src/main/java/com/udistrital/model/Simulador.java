@@ -29,6 +29,7 @@ public class Simulador {
     private IInstruccionSimulator RESULT; 
     private String display;
     private String userControl;
+    private String bus;
     private String[] binRAM; 
 
     private Simulador(){
@@ -45,6 +46,7 @@ public class Simulador {
         RESULT = new Instruccion("RESULT","");
         display = "";
         userControl = "";
+        bus = "";
         binRAM = null;
     }
     
@@ -149,6 +151,14 @@ public class Simulador {
 
     public void setUserControl(String userControl) {
         this.userControl = userControl;
+    }
+
+    public String getBus() {
+        return bus;
+    }
+
+    public void setBus(String bus) {
+        this.bus = bus;
     }
 
     public String[] getBinRAM() {
