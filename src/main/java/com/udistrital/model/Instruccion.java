@@ -91,11 +91,19 @@ public class Instruccion implements IInstruccionSimulator{
         this.pasosControl = pasosControl;
     }
     
-    public String getContenido() {
-        return contenido;
+    public String getContenido(int tamano) {
+        return fillWithZerosString(contenido, tamano);
     }
 
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
+    public void setContenido(Integer contenido) {
+        this.contenido = Integer.toBinaryString(contenido);
+    }
+    
+    public static String fillWithZerosString(String binar, int tamano){
+        String retorno = "";
+        for(int i = binar.length();i < tamano; i++){
+            retorno+="0";
+        }
+        return retorno.concat(binar);
     }
 }

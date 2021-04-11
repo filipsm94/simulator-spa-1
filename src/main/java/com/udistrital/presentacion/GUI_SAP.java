@@ -169,7 +169,7 @@ public class GUI_SAP extends javax.swing.JFrame {
     
     
     
-    public void paintComponents(Graphics g, boolean bool) {
+    public void paintComponents(Graphics g, boolean bool, String valor) {
         super.paintComponents(g);
         String pasoControl =sapModel.getPasoControl();
         IInstruccionSimulator inst = null;
@@ -180,6 +180,7 @@ public class GUI_SAP extends javax.swing.JFrame {
                 inst = simulador.getMAR();
                 inst.setEstado(bool);
                 inst.setEstadoLineasIn(bool);
+                inst.setContenido(Integer.parseInt(valor));
                 if(inst.getPasosControl().contains("MI")){
                     inst.setPasoControl("MI");
                 }
@@ -192,6 +193,7 @@ public class GUI_SAP extends javax.swing.JFrame {
                 inst = simulador.getRAM();
                 inst.setEstado(bool);
                 inst.setEstadoLineasOut(bool);
+                inst.setContenido(Integer.parseInt(valor));
                 if(inst.getPasosControl().contains("RO")){
                     inst.setPasoControl("RO");
                 }
