@@ -5,6 +5,7 @@
  */
 package com.udistrital.presentacion;
 
+import com.udistrital.model.Simulador;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -33,7 +34,6 @@ public class UtilFront {
     
     public static void RI(Graphics g){
         g.setColor( Color.RED );
-        // AO
         // RI
         g.drawString( "RI", 65, 525);
         g.fillRect( 65, 530, 15, 15 );
@@ -232,40 +232,157 @@ public class UtilFront {
         g.drawString( result, 430, 420 );
     }
     
-      public static void pintarBase(Graphics g){
-        g.setColor( Color.BLACK );
+      public static void pintarBase(Graphics g, Simulador s){
+        
         
         //MAR
-        g.drawString( "MAR", 40, 60 );
-        g.drawRect( 40, 60, 120, 60 );
-        //OUT MAR
-        g.drawLine( 160, 80, 260, 80 );
-        //IN MAR
-        g.drawLine( 160, 100, 260, 100 );
+        if(s.getMAR().getEstado()){
+             g.setColor( Color.RED );
+            //MAR
+            g.drawString( "MAR", 40, 60 );
+            g.drawRect( 40, 60, 120, 60 );
+            if(s.getMAR().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT MAR
+                g.drawLine( 160, 80, 260, 80 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT MAR
+                g.drawLine( 160, 80, 260, 80 );
+            }
+            
+            if(s.getMAR().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN MAR
+                g.drawLine( 160, 100, 260, 100 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN MAR
+                g.drawLine( 160, 100, 260, 100 );
+            }
+            
+        }else{
+            g.setColor( Color.BLACK );
+            g.drawString( "MAR", 40, 60 );
+            g.drawRect( 40, 60, 120, 60 );
+            //OUT MAR
+            g.drawLine( 160, 80, 260, 80 );
+            //IN MAR
+            g.drawLine( 160, 100, 260, 100 );
+        }
+            
         
-        //RAM
-        g.drawString( "RAM", 40, 140 );
-        g.drawRect( 40, 140, 120, 60 );
-        //OUT RAM
-        g.drawLine( 160, 160, 260, 160 );
-        //IN MAR
-        g.drawLine( 160, 180, 260, 180 );
+        if(s.getRAM().getEstado()){
+            g.setColor( Color.RED );
+            //RAM
+            g.drawString( "RAM", 40, 140 );
+            g.drawRect( 40, 140, 120, 60 );
+            
+            if(s.getRAM().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT RAM
+                g.drawLine( 160, 160, 260, 160 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT RAM
+                g.drawLine( 160, 160, 260, 160 );
+            }
+            
+            if(s.getRAM().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN RAM
+                g.drawLine( 160, 100, 260, 100 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN RAM
+                g.drawLine( 160, 100, 260, 100 );
+            }
         
-        //PC
-        g.drawString( "PC", 40, 220 );
-        g.drawRect( 40, 220, 120, 60 );
-        //OUT PC
-        g.drawLine( 160, 240, 260, 240 );
-        //IN PC
-        g.drawLine( 160, 260, 260, 260 );
+        }else{
+            g.setColor( Color.BLACK );
+            //RAM
+            g.drawString( "RAM", 40, 140 );
+            g.drawRect( 40, 140, 120, 60 );
+            //OUT RAM
+            g.drawLine( 160, 160, 260, 160 );
+            //IN MAR
+            g.drawLine( 160, 180, 260, 180 );
+        }
         
-        //RI
-        g.drawString( "REG. INST.", 40, 300 );
-        g.drawRect( 40, 300, 120, 60 );
-        //OUT RI
-        g.drawLine( 160, 320, 260, 320 );
-        //IN RI
-        g.drawLine( 160, 340, 260, 340 );
+         if(s.getPC().getEstado()){
+             
+            g.setColor( Color.RED );
+            //PC
+            g.drawString( "PC", 40, 220 );
+            g.drawRect( 40, 220, 120, 60 );
+             
+            if(s.getPC().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT PC
+                g.drawLine( 160, 240, 260, 240 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT PC
+                g.drawLine( 160, 240, 260, 240 );
+            }
+            
+            if(s.getPC().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN PC
+                g.drawLine( 160, 260, 260, 260 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN PC
+                g.drawLine( 160, 260, 260, 260 );
+            }
+        
+        }else{
+            g.setColor( Color.BLACK );
+            //PC
+            g.drawString( "PC", 40, 220 );
+            g.drawRect( 40, 220, 120, 60 );
+            //OUT PC
+            g.drawLine( 160, 240, 260, 240 );
+            //IN PC
+            g.drawLine( 160, 260, 260, 260 );
+        }
+        
+        if(s.getIR().getEstado()){
+            g.setColor( Color.BLACK );
+            //RI
+            g.drawString( "REG. INST.", 40, 300 );
+            g.drawRect( 40, 300, 120, 60 );
+            
+            if(s.getIR().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT RI
+                g.drawLine( 160, 320, 260, 320 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT RI
+                g.drawLine( 160, 320, 260, 320 );
+            }
+            
+            if(s.getIR().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN RI
+                g.drawLine( 160, 340, 260, 340 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN RI
+                g.drawLine( 160, 340, 260, 340 );
+            }
+        
+        }else{
+            g.setColor( Color.BLACK );
+            //RI
+            g.drawString( "REG. INST.", 40, 300 );
+            g.drawRect( 40, 300, 120, 60 );
+            //OUT RI
+            g.drawLine( 160, 320, 260, 320 );
+            //IN RI
+            g.drawLine( 160, 340, 260, 340 );
+        }
         
         //CS
         g.drawString( "UC", 40, 380 );
@@ -275,37 +392,161 @@ public class UtilFront {
         //BUS
         g.drawRect( 260, 60, 20, 380 );
         
-        //A
-        g.drawString( "A", 380, 60 );
-        g.drawRect(380, 60, 120, 60 );
-        //OUT A
-        g.drawLine( 280, 80, 380, 80 );
-        //IN A
-        g.drawLine( 280, 100, 380, 100 );
         
-        //ALU
-        g.drawString( "ALU", 380, 140 );
-        g.drawRect( 380, 140, 120, 60 );
-        //OUT ALU
-        g.drawLine( 280, 160, 380, 160 );
-        //IN ALU
-        g.drawLine( 280, 180, 380, 180 );
+        if(s.getAC().getEstado()){
+            g.setColor( Color.RED );
+            //A
+            g.drawString( "A", 380, 60 );
+            g.drawRect(380, 60, 120, 60 );
+            
+            if(s.getAC().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT A
+                g.drawLine( 280, 80, 380, 80 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT A
+                g.drawLine( 280, 80, 380, 80 );
+            }
+            
+            if(s.getAC().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN A
+                g.drawLine( 280, 100, 380, 100 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN A
+                g.drawLine( 280, 100, 380, 100 );
+            }
         
-        //B
-        g.drawString( "B", 380, 220 );
-        g.drawRect( 380, 220, 120, 60 );
-        //OUT B
-        g.drawLine( 280, 240, 380, 240 );
-        //IN B
-        g.drawLine( 280, 260, 380, 260 );
+        }else{
+            g.setColor( Color.BLACK );
+            //A
+            g.drawString( "A", 380, 60 );
+            g.drawRect(380, 60, 120, 60 );
+            //OUT A
+            g.drawLine( 280, 80, 380, 80 );
+            //IN A
+            g.drawLine( 280, 100, 380, 100 );
+        }
         
-        //RS
-        g.drawString( "RS", 380, 300 );
-        g.drawRect( 380, 300, 120, 60 );
-        //OUT RS
-        g.drawLine( 280, 320, 380, 320 );
-        //IN RS
-        g.drawLine( 280, 340, 380, 340 );
+        
+        
+        if(s.getALU().getEstado()){
+            g.setColor( Color.RED );
+            //ALU
+            g.drawString( "ALU", 380, 140 );
+            g.drawRect( 380, 140, 120, 60 );
+            
+            if(s.getALU().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT ALU
+                g.drawLine( 280, 160, 380, 160 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT ALU
+                g.drawLine( 280, 160, 380, 160 );
+            }
+            
+            if(s.getALU().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN ALU
+                g.drawLine( 280, 180, 380, 180 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN ALU
+                g.drawLine( 280, 180, 380, 180 );
+            }
+        
+        }else{
+            g.setColor( Color.BLACK );
+            //ALU
+            g.drawString( "ALU", 380, 140 );
+            g.drawRect( 380, 140, 120, 60 );
+            //OUT ALU
+            g.drawLine( 280, 160, 380, 160 );
+            //IN ALU
+            g.drawLine( 280, 180, 380, 180 );
+        }
+        
+        
+        
+        if(s.getB().getEstado()){
+            g.setColor( Color.RED );
+            //B
+            g.drawString( "B", 380, 220 );
+            g.drawRect( 380, 220, 120, 60 );
+            
+            if(s.getB().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT B
+                g.drawLine( 280, 240, 380, 240 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT B
+                g.drawLine( 280, 240, 380, 240 );
+            }
+            
+            if(s.getB().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN B
+                g.drawLine( 280, 260, 380, 260 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN B
+                g.drawLine( 280, 260, 380, 260 );
+            }
+        
+        }else{
+            g.setColor( Color.BLACK );
+            //B
+            g.drawString( "B", 380, 220 );
+            g.drawRect( 380, 220, 120, 60 );
+            //OUT B
+            g.drawLine( 280, 240, 380, 240 );
+            //IN B
+            g.drawLine( 280, 260, 380, 260 );
+        }
+        
+        
+        
+        if(s.getRESULT().getEstado()){
+             g.setColor( Color.RED );
+            //RS
+            g.drawString( "RS", 380, 300 );
+            g.drawRect( 380, 300, 120, 60 );
+            
+            if(s.getRESULT().getEstadoLineasOut()){
+                g.setColor( Color.RED );
+                //OUT RS
+                g.drawLine( 280, 320, 380, 320 );
+            }else{
+                g.setColor( Color.BLACK );
+                //OUT RS
+                g.drawLine( 280, 320, 380, 320 );
+            }
+            
+            if(s.getRESULT().getEstadoLineasIn()){
+                g.setColor( Color.RED );
+                //IN RS
+                g.drawLine( 280, 340, 380, 340 );
+            }else{
+                g.setColor( Color.BLACK );
+                //IN RS
+                g.drawLine( 280, 340, 380, 340 );
+            }
+        
+        }else{
+            g.setColor( Color.BLACK );
+            //RS
+            g.drawString( "RS", 380, 300 );
+            g.drawRect( 380, 300, 120, 60 );
+            //OUT RS
+            g.drawLine( 280, 320, 380, 320 );
+            //IN RS
+            g.drawLine( 280, 340, 380, 340 );
+        }
+        
         
         //DISPLAY
         g.drawString( "DISPLAY", 380, 380);
