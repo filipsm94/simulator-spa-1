@@ -58,19 +58,11 @@ public class UtilFront {
             //MAR
             g.drawString( "MAR", 40, 60 );
             g.drawRect( 40, 60, 120, 60 );
-            if(s.getMAR().getEstadoLineasOut()){
-                //OUT MAR
-                g.setColor( Color.RED );
-                g.drawLine( 160, 80, 260, 80 );
-            }else{
-                //OUT MAR
-                g.setColor( Color.BLACK );
-                g.drawLine( 160, 80, 260, 80 );
-            }
             
             if(s.getMAR().getEstadoLineasIn()){
                 //IN MAR
                 g.setColor( Color.RED );
+                g.drawString( "IN", 160, 100);
                 g.drawLine( 160, 100, 260, 100 );
             }else{
                 //IN MAR
@@ -82,8 +74,6 @@ public class UtilFront {
             g.setColor( Color.BLACK );
             g.drawString( "MAR", 40, 60 );
             g.drawRect( 40, 60, 120, 60 );
-            //OUT MAR
-            g.drawLine( 160, 80, 260, 80 );
             //IN MAR
             g.drawLine( 160, 100, 260, 100 );
         }
@@ -100,6 +90,7 @@ public class UtilFront {
             if(s.getRAM().getEstadoLineasOut()){
                 g.setColor( Color.RED );
                 //OUT RAM
+                g.drawString( "OUT", 160, 160);
                 g.drawLine( 160, 160, 260, 160 );
             }else{
                 g.setColor( Color.BLACK );
@@ -107,15 +98,7 @@ public class UtilFront {
                 g.drawLine( 160, 160, 260, 160 );
             }
             
-            if(s.getRAM().getEstadoLineasIn()){
-                g.setColor( Color.RED );
-                //IN RAM
-                g.drawLine( 160, 180, 260, 180 );
-            }else{
-                g.setColor( Color.BLACK );
-                //IN RAM
-                g.drawLine( 160, 180, 260, 180 );
-            }
+            
             if(!s.getRAM().getContenido(8).equals("")){
                 g.drawString( s.getRAM().getContenido(8), 60, 160 );
             }
@@ -127,8 +110,6 @@ public class UtilFront {
             g.drawRect( 40, 140, 120, 60 );
             //OUT RAM
             g.drawLine( 160, 160, 260, 160 );
-            //IN MAR
-            g.drawLine( 160, 180, 260, 180 );
             if(!s.getRAM().getContenido(8).equals("")){
                 g.drawString( s.getRAM().getContenido(8), 60, 160 );
             }
@@ -146,6 +127,7 @@ public class UtilFront {
             if(s.getPC().getEstadoLineasOut()){
                 g.setColor( Color.RED );
                 //OUT PC
+                g.drawString( "OUT", 160, 240);
                 g.drawLine( 160, 240, 260, 240 );
             }else{
                 g.setColor( Color.BLACK );
@@ -156,6 +138,7 @@ public class UtilFront {
             if(s.getPC().getEstadoLineasIn()){
                 g.setColor( Color.RED );
                 //IN PC
+                g.drawString( "IN", 160, 260);
                 g.drawLine( 160, 260, 260, 260 );
             }else{
                 g.setColor( Color.BLACK );
@@ -190,6 +173,7 @@ public class UtilFront {
             if(s.getIR().getEstadoLineasOut()){
                 g.setColor( Color.RED );
                 //OUT RI
+                g.drawString( "OUT", 160, 320);
                 g.drawLine( 160, 320, 260, 320 );
             }else{
                 g.setColor( Color.BLACK );
@@ -200,6 +184,7 @@ public class UtilFront {
             if(s.getIR().getEstadoLineasIn()){
                 g.setColor( Color.RED );
                 //IN RI
+                g.drawString( "IN", 160, 340);
                 g.drawLine( 160, 340, 260, 340 );
             }else{
                 g.setColor( Color.BLACK );
@@ -229,6 +214,7 @@ public class UtilFront {
             if(s.getAC().getEstadoLineasOut()){
                 g.setColor( Color.RED );
                 //OUT A
+                g.drawString( "OUT", 280, 80);
                 g.drawLine( 280, 80, 380, 80 );
             }else{
                 g.setColor( Color.BLACK );
@@ -239,6 +225,7 @@ public class UtilFront {
             if(s.getAC().getEstadoLineasIn()){
                 g.setColor( Color.RED );
                 //IN A
+                g.drawString( "IN", 280, 100);
                 g.drawLine( 280, 100, 380, 100 );
             }else{
                 g.setColor( Color.BLACK );
@@ -268,21 +255,12 @@ public class UtilFront {
             if(s.getALU().getEstadoLineasOut()){
                 g.setColor( Color.RED );
                 //OUT ALU
+                g.drawString( "OUT", 280, 160);
                 g.drawLine( 280, 160, 380, 160 );
             }else{
                 g.setColor( Color.BLACK );
                 //OUT ALU
                 g.drawLine( 280, 160, 380, 160 );
-            }
-            
-            if(s.getALU().getEstadoLineasIn()){
-                g.setColor( Color.RED );
-                //IN ALU
-                g.drawLine( 280, 180, 380, 180 );
-            }else{
-                g.setColor( Color.BLACK );
-                //IN ALU
-                g.drawLine( 280, 180, 380, 180 );
             }
         
         }else{
@@ -292,8 +270,6 @@ public class UtilFront {
             g.drawRect( 380, 140, 120, 60 );
             //OUT ALU
             g.drawLine( 280, 160, 380, 160 );
-            //IN ALU
-            g.drawLine( 280, 180, 380, 180 );
         }
     }
     
@@ -304,19 +280,11 @@ public class UtilFront {
             g.drawString( "B", 380, 220 );
             g.drawRect( 380, 220, 120, 60 );
             
-            if(s.getB().getEstadoLineasOut()){
-                g.setColor( Color.RED );
-                //OUT B
-                g.drawLine( 280, 240, 380, 240 );
-            }else{
-                g.setColor( Color.BLACK );
-                //OUT B
-                g.drawLine( 280, 240, 380, 240 );
-            }
             
             if(s.getB().getEstadoLineasIn()){
                 g.setColor( Color.RED );
                 //IN B
+                g.drawString( "OUT", 280, 260);
                 g.drawLine( 280, 260, 380, 260 );
             }else{
                 g.setColor( Color.BLACK );
@@ -329,8 +297,6 @@ public class UtilFront {
             //B
             g.drawString( "B", 380, 220 );
             g.drawRect( 380, 220, 120, 60 );
-            //OUT B
-            g.drawLine( 280, 240, 380, 240 );
             //IN B
             g.drawLine( 280, 260, 380, 260 );
         }
@@ -346,21 +312,12 @@ public class UtilFront {
             if(s.getRESULT().getEstadoLineasOut()){
                 g.setColor( Color.RED );
                 //OUT RS
+                g.drawString( "OUT", 280, 320);
                 g.drawLine( 280, 320, 380, 320 );
             }else{
                 g.setColor( Color.BLACK );
                 //OUT RS
                 g.drawLine( 280, 320, 380, 320 );
-            }
-            
-            if(s.getRESULT().getEstadoLineasIn()){
-                g.setColor( Color.RED );
-                //IN RS
-                g.drawLine( 280, 340, 380, 340 );
-            }else{
-                g.setColor( Color.BLACK );
-                //IN RS
-                g.drawLine( 280, 340, 380, 340 );
             }
         
         }else{
@@ -370,8 +327,6 @@ public class UtilFront {
             g.drawRect( 380, 300, 120, 60 );
             //OUT RS
             g.drawLine( 280, 320, 380, 320 );
-            //IN RS
-            g.drawLine( 280, 340, 380, 340 );
         }
     }
     
