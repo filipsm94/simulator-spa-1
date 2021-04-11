@@ -18,16 +18,20 @@ import javax.swing.JTextArea;
  *
  * @author jhogarcia
  */
-public class Core {
+public class Core implements Runnable {
 
     private int counter = 0;
     
-    public static void logica(GUI_SAP sap, Simulador s, JTextArea ram){
+    public static GUI_SAP sap;
+    public static Simulador s; 
+    public static JTextArea ram;
+    
+    public static void logica(){
         int A=0;
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
         s.resetValues();
-        String[] memory = cargarRam(ram, s);
+        String[] memory = cargarRam();
         System.out.println("Ram en binarios" + Arrays.asList(s.getBinRAM()));
 
         
@@ -44,12 +48,12 @@ public class Core {
                 
                 if(paso.length>1){
                     System.out.println("paso "+ paso[0] +" "+paso[1]+" i:"+i);
-                    pintarPaso(palabrasControl,paso,sap,s);
+                    pintarPaso(palabrasControl,paso);
                     
                     if((flag && paso[0].equals("JC")) || paso[0].equals("JMP")){
                         i=Integer.parseInt(paso[1]);
                     }else{
-                        A=pasoInst(paso[0],Integer.parseInt(paso[1]),memory,A,sap);
+                        A=pasoInst(paso[0],Integer.parseInt(paso[1]),memory,A);
                         if(paso[0].equals("SUB")){
                             flag = A>=0;
                         }
@@ -59,9 +63,9 @@ public class Core {
                 }else{
                     System.out.println("paso "+ paso[0] +" i:"+i);
                     if(paso[0].equals("OUT")){
-                        pintarPaso(palabrasControl,paso,sap,s);
+                        pintarPaso(palabrasControl,paso);
                     }
-                    A=pasoInst(paso[0],0,memory,A,sap);
+                    A=pasoInst(paso[0],0,memory,A);
                     i++;
                 }
             }else{
@@ -74,7 +78,7 @@ public class Core {
     
     
     
-    public static String[] cargarRam(JTextArea ram, Simulador s){
+    public static String[] cargarRam(){
         String memory[] = ram.getText().split("\\r?\\n");
         String memoryBin[] = ram.getText().split("\\r?\\n");
         Constans constant = new Constans();
@@ -116,7 +120,7 @@ public class Core {
         return memory;                 
     }
     
-    public static int pasoInst(String instruccion, int value,String[] memory, int A,GUI_SAP sap){
+    public static int pasoInst(String instruccion, int value,String[] memory, int A){
         switch(instruccion) {
             case "LDA":
               A=Integer.parseInt(memory[value]);
@@ -148,7 +152,7 @@ public class Core {
     }
     
     
-    public static void pintarPaso(HashMap<String,List<String>> palabrasControl,String[] instruccion,GUI_SAP sap, Simulador s){
+    public static void pintarPaso(HashMap<String,List<String>> palabrasControl,String[] instruccion){
         List<String> pasoViewFetch=palabrasControl.get("FETCH");
         List<String> pasoView= palabrasControl.get(instruccion[0]);
         System.out.println("Instruccion : "+instruccion[0]);
@@ -162,7 +166,7 @@ public class Core {
                 if(instruccion.length > 1) instruct = instruccion[1];
                 sap.paintComponents(sap.getGraphics(),true,instruct);
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(sap.sapModel.getSleep());
                     
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Core.class.getName()).log(Level.SEVERE, null, ex);
@@ -183,7 +187,7 @@ public class Core {
                 
                 sap.paintComponents(sap.getGraphics(),true,instruct);
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(sap.sapModel.getSleep());
                     
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Core.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,6 +197,12 @@ public class Core {
             sap.sapModel.setReloj(sap.sapModel.getReloj()+1);
             System.out.println("CICLO DE RELOJ"+(sap.sapModel.getReloj()));
         }
+    }
+
+    @Override
+    public void run() {
+        logica();
+        sap.start.setEnabled(true);
     }
     
 }

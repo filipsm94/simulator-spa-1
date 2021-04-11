@@ -17,6 +17,16 @@ public class SAPModel {
     public int reloj = 0;
     
     public String pasoControl;
+    
+    public int sleep=100;
+
+    public int getSleep() {
+        return sleep;
+    }
+
+    public void setSleep(int sleep) {
+        this.sleep = sleep;
+    }
 
     public String getPasoControl() {
         return pasoControl;

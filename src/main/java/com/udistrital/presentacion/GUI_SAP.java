@@ -10,12 +10,15 @@ import com.udistrital.model.IInstruccionSimulator;
 import com.udistrital.model.Simulador;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author jhogarcia
  */
-public class GUI_SAP extends javax.swing.JFrame {
+public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
 
     /**
      * Creates new form GUI_SAP
@@ -28,6 +31,7 @@ public class GUI_SAP extends javax.swing.JFrame {
     public GUI_SAP() {
         initComponents();
         setSize( 800, 800 );
+        jSlider1.addChangeListener(this);
         this.simulador = Simulador.getInstance();
         setVisible( true );
 //        if(sapModel==null){
@@ -49,6 +53,7 @@ public class GUI_SAP extends javax.swing.JFrame {
         textAreaRam = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jSlider1 = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,22 +73,30 @@ public class GUI_SAP extends javax.swing.JFrame {
 
         jLabel2.setText("Ingresa Los datos ejem:");
 
+        jSlider1.setBackground(new java.awt.Color(51, 51, 255));
+        jSlider1.setForeground(new java.awt.Color(0, 0, 0));
+        jSlider1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(323, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addComponent(start)
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(336, 336, 336)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(start)
-                            .addGap(84, 84, 84))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap()))))
+                    .addComponent(jLabel1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +108,9 @@ public class GUI_SAP extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(start)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(start)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -103,8 +118,14 @@ public class GUI_SAP extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+        start.setEnabled(false);
+        Core.sap=this;
+        Core.s=simulador;
+        Core.ram=textAreaRam;
+        Core core= new Core();
         
-        Core.logica(this, simulador, textAreaRam);
+        Thread nuevoh=new Thread(core);
+        nuevoh.start();
         
     }//GEN-LAST:event_startActionPerformed
 
@@ -371,7 +392,20 @@ public class GUI_SAP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton start;
+    private javax.swing.JSlider jSlider1;
+    public javax.swing.JButton start;
     private javax.swing.JTextArea textAreaRam;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        JSlider source = (JSlider)e.getSource();
+        if (!source.getValueIsAdjusting()) {
+            int fps = (int)source.getValue();
+            fps=fps*30;
+            sapModel.setSleep(fps);
+
+            System.out.println("com.udistrital.presentacion.GUI_SAP.stateChanged()"+ fps);
+        }
+    }
 }
