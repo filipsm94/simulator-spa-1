@@ -133,4 +133,10 @@ public class Instruccion implements IInstruccionSimulator{
     public String getContenidoString() {
         return this.contenidoString;
     }
+
+    @Override
+    public void clearValue() {
+        setContenido(0);
+        setContenidoString("");
+    }
 }

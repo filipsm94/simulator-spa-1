@@ -32,6 +32,7 @@ public class Core implements Runnable {
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
         s.resetValues();
+        sap.sapModel.setReloj(0);
         memory = cargarRam();
         System.out.println("Ram en binarios" + Arrays.asList(s.getBinRAM()));
 

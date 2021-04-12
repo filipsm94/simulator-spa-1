@@ -172,5 +172,16 @@ public class Simulador {
     public void resetValues(){
         setUserControl("");
         setDisplay("");
+        getMAR().clearValue();
+        getRAM().clearValue();
+        getPC().clearValue();
+        getIR().clearValue();
+        getAC().clearValue();
+        getALU().clearValue();
+        getB().clearValue();
+        getRESULT().clearValue();
+        
+        getUC().clearValue();
+        setDisplay("");
     }
 }

@@ -45,4 +45,6 @@ public interface IInstruccionSimulator {
     public boolean getConvert();
     
     public void setConvert(boolean convert);
+    
+    public void clearValue();
 }
