@@ -11,8 +11,10 @@ import com.udistrital.model.Simulador;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -27,6 +29,8 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
     public SAPModel sapModel=new SAPModel();
     
     public Simulador simulador;
+    
+    final int SCROLL_BUFFER_SIZE = 16;
     
     public GUI_SAP() {
         initComponents();
@@ -139,6 +143,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
         Core.sap=this;
         Core.s=simulador;
         Core.ram=textAreaRam;
+        trunkTextArea(textAreaRam);
         Core core= new Core();
         
         Thread nuevoh=new Thread(core);
@@ -181,6 +186,21 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
         });
     }
     
+    public void trunkTextArea(JTextArea txtWin) {
+            
+        int numLinesToTrunk = txtWin.getLineCount() - SCROLL_BUFFER_SIZE;
+        if(numLinesToTrunk > 0) {
+            try {
+                for (int i = 0; i < numLinesToTrunk; i++) {
+                    int startMax = txtWin.getLineEndOffset(SCROLL_BUFFER_SIZE - 1);
+                    int endMax = txtWin.getLineEndOffset(SCROLL_BUFFER_SIZE);
+                    txtWin.replaceRange("",startMax, endMax);
+                }
+            } catch (BadLocationException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
     
 //     @Override
 //    public void paint(Graphics g) {
