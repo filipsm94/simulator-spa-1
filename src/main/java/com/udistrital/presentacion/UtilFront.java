@@ -344,6 +344,10 @@ public class UtilFront {
             //OUT RS
             g.drawLine( 280, 320, 380, 320 );
         }
+        
+        if(!s.getRESULT().getContenido(8).equals("")){
+            g.drawString( s.getRESULT().getContenido(8), 400, 330 );
+        }
     }
     
     public static void pintarBase(Graphics g, Simulador s){
