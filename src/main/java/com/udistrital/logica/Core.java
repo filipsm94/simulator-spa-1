@@ -42,7 +42,7 @@ public class Core implements Runnable {
         
         int i=0;
         while(i<memory.length){
-            s.getPC().setContenido(i+1);
+            //s.getPC().setContenido(i+1);
             if(memory[i]!=null){
                 
                 if(memory[i].equals("HLT")){
