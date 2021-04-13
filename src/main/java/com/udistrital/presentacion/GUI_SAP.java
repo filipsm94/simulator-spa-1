@@ -209,7 +209,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
     
     public void paintComponents(Graphics g, boolean bool, String[] paso,int i) {
         super.paintComponents(g);
-        String pasoControl =sapModel.getPasoControl();
+        String pasoControl = sapModel.getPasoControl();
         IInstruccionSimulator inst = null;
         
         switch(pasoControl) {
