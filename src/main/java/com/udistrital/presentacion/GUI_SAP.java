@@ -6,6 +6,8 @@
 package com.udistrital.presentacion;
 
 import com.udistrital.logica.Core;
+import static com.udistrital.logica.Core.s;
+import com.udistrital.logica.UtilCore;
 import com.udistrital.model.IInstruccionSimulator;
 import com.udistrital.model.Simulador;
 import java.awt.Color;
@@ -254,7 +256,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 inst.setEstado(bool);
                 inst.setEstadoLineasOut(bool);
                 if(!inst.getConvert()){
-                    inst.setContenido(Integer.parseInt(paso[1]));
+                    inst.setContenido(Integer.parseInt(simulador.getBinRAM()[i-1],2));
                 }
                 if(inst.getPasosControl().contains("RO")){
                     inst.setPasoControl("RO");
@@ -288,6 +290,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                     inst.setPasoControl("II");
                 }
                 inst.setContenido(simulador.getBus());
+                simulador.setUserControl(paso[0]);
               break;
             case "IO":
                 inst = simulador.getIR();
@@ -296,7 +299,11 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("IO")){
                     inst.setPasoControl("IO");
                 }
-                simulador.setBus(inst.getContenido());
+                String valor = Integer.toBinaryString(inst.getContenido());
+                valor = UtilCore.fillWithZerosString(valor, 8);
+                String retorno  = valor.substring(4);
+                
+                simulador.setBus(Integer.parseInt(retorno,2));
               break;
             case "AI":
                 inst = simulador.getAC();

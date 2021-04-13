@@ -363,13 +363,17 @@ public class UtilFront {
         
         //BUS
         g.setColor( Color.BLACK );
+        g.drawString( "BUS", 260, 60);
         g.drawRect( 260, 60, 20, 380 );
         
         
         
         // Control Words
         g.drawString( "Palabras de control", 40, 500);
-        g.drawRect( 40, 500, 380, 120 );
+        g.drawRect( 40, 500, 350, 60 );
+        
+        // cycle
+        g.drawString( "Ciclo : " + s.getReloj(), 400, 500);
         
         // MI
         if(s.getMAR().getEstado() && s.getMAR().getPasoControl().equals("MI")){

@@ -29,6 +29,7 @@ public class Simulador {
     private IInstruccionSimulator RESULT; 
     private String display;
     private String userControl;
+    private int reloj;
     private int bus;
     private String[] binRAM; 
 
@@ -47,6 +48,7 @@ public class Simulador {
         display = "";
         userControl = "";
         bus = 0;
+        reloj = 0;
         binRAM = null;
     }
     
@@ -169,6 +171,14 @@ public class Simulador {
         this.binRAM = binRAM;
     }
 
+    public int getReloj() {
+        return reloj;
+    }
+
+    public void setReloj(int reloj) {
+        this.reloj = reloj;
+    }
+    
     public void resetValues(){
         setUserControl("");
         setDisplay("");
@@ -180,7 +190,7 @@ public class Simulador {
         getALU().clearValue();
         getB().clearValue();
         getRESULT().clearValue();
-        
+        setReloj(0);
         getUC().clearValue();
         setDisplay("");
     }

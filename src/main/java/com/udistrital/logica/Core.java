@@ -32,9 +32,9 @@ public class Core implements Runnable {
         boolean flag=false;
         HashMap<String,List<String>> palabrasControl = UtilCore.iniciarPalabrasControl();
         s.resetValues();
-        sap.sapModel.setReloj(0);
         memory = cargarRam();
         System.out.println("Ram en binarios" + Arrays.asList(s.getBinRAM()));
+        System.out.println(Integer.parseInt(s.getBinRAM()[0],2));
 
         String [] auxInst= new String[2];
         auxInst[0]="0";
@@ -51,7 +51,6 @@ public class Core implements Runnable {
                     break;
                 }
                 String[] paso = memory[i].split(" ");
-                s.setUserControl(paso[0]);
                 System.out.println("paso FETCH");
                 if(flagInst){
                     instFETCH(palabrasControl,auxInst,paso,i+1);
@@ -209,8 +208,8 @@ public class Core implements Runnable {
                 }
                 sap.paintComponents(sap.getGraphics(),false,instruct,im);
             }
-            sap.sapModel.setReloj(sap.sapModel.getReloj()+1);
-            System.out.println("CICLO DE RELOJ"+(sap.sapModel.getReloj()));
+            s.setReloj(s.getReloj()+1);
+            System.out.println("CICLO DE RELOJ : "+(s.getReloj()));
         }
         
     }
@@ -238,8 +237,8 @@ public class Core implements Runnable {
                 }
                 sap.paintComponents(sap.getGraphics(),false,instruct,im);
             }
-            sap.sapModel.setReloj(sap.sapModel.getReloj()+1);
-            System.out.println("CICLO DE RELOJ"+(sap.sapModel.getReloj()));
+            s.setReloj(s.getReloj()+1);
+            System.out.println("CICLO DE RELOJ : "+(s.getReloj()));
         }
     }
     
@@ -276,8 +275,8 @@ public class Core implements Runnable {
                 sap.paintComponents(sap.getGraphics(),false,instruct,im);
                 s.getRAM().setConvert(false);
             }
-            sap.sapModel.setReloj(sap.sapModel.getReloj()+1);
-            System.out.println("CICLO DE RELOJ"+(sap.sapModel.getReloj()));
+            s.setReloj(s.getReloj()+1);
+            System.out.println("CICLO DE RELOJ : "+(s.getReloj()));
         }
     }
 
