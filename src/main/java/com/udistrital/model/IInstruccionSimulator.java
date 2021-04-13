@@ -38,6 +38,7 @@ public interface IInstruccionSimulator {
     
     public void setContenido(Integer contenido);
     
+    // siver para el texto de la ALU
     public void setContenidoString(String contenidoString);
     
      public String getContenidoString();

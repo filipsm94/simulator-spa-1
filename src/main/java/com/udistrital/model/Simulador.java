@@ -180,8 +180,6 @@ public class Simulador {
     }
     
     public void resetValues(){
-        setUserControl("");
-        setDisplay("");
         getMAR().clearValue();
         getRAM().clearValue();
         getPC().clearValue();
@@ -190,8 +188,10 @@ public class Simulador {
         getALU().clearValue();
         getB().clearValue();
         getRESULT().clearValue();
-        setReloj(0);
         getUC().clearValue();
+        setReloj(0);
+        setDisplay("");
+        setUserControl("");
         setDisplay("");
     }
 }

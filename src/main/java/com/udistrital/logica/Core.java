@@ -19,13 +19,17 @@ import javax.swing.JTextArea;
  * @author jhogarcia
  */
 public class Core implements Runnable {
-
-    private int counter = 0;
     
     public static GUI_SAP sap;
     public static Simulador s; 
     public static JTextArea ram;
     public static String[] memory;
+
+    public Core(GUI_SAP sap, Simulador s, JTextArea ram) {
+        this.sap = sap;
+        this.s = s;
+        this.ram = ram;
+    }
     
     public static void logica(){
         int A=0;
@@ -34,7 +38,6 @@ public class Core implements Runnable {
         s.resetValues();
         memory = cargarRam();
         System.out.println("Ram en binarios" + Arrays.asList(s.getBinRAM()));
-        System.out.println(Integer.parseInt(s.getBinRAM()[0],2));
 
         String [] auxInst= new String[2];
         auxInst[0]="0";
@@ -87,8 +90,6 @@ public class Core implements Runnable {
         sap.repaint();
         System.out.println("TERMINO PROGRAMA "+ A);
     }
-    
-    
     
     public static String[] cargarRam(){
         String memory[] = ram.getText().split("\\r?\\n");
@@ -240,8 +241,7 @@ public class Core implements Runnable {
             s.setReloj(s.getReloj()+1);
             System.out.println("CICLO DE RELOJ : "+(s.getReloj()));
         }
-    }
-    
+    }    
     
     public static void pintarPaso(HashMap<String,List<String>> palabrasControl,String[] instruccion,int im){
         List<String> pasoView= palabrasControl.get(instruccion[0]);
