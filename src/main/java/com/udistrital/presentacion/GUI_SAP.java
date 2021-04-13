@@ -290,7 +290,7 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
                 if(inst.getPasosControl().contains("AI")){
                     inst.setPasoControl("AI");
                 }
-                inst.setContenido(simulador.getBus());
+                inst.setContenido(simulador.getBus()>0 ? simulador.getBus():0);
               break;
             case "AO":
                 inst = simulador.getAC();
