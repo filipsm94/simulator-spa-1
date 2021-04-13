@@ -251,8 +251,8 @@ public class UtilFront {
         }
         
         if(!s.getAC().getContenido(8).equals("")){
-                g.drawString( s.getAC().getContenido(8), 400, 90 );
-            }
+            g.drawString( s.getAC().getContenido(8), 400, 90 );
+        }
     }
     
     private static void paintALU(Graphics g, Simulador s){
