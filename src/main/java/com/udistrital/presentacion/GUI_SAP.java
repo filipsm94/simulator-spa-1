@@ -142,11 +142,8 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         start.setEnabled(false);
-        Core.sap=this;
-        Core.s=simulador;
-        Core.ram=textAreaRam;
         trunkTextArea(textAreaRam);
-        Core core= new Core();
+        Core core= new Core(this,simulador,textAreaRam);
         
         Thread nuevoh=new Thread(core);
         nuevoh.start();
@@ -204,30 +201,11 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
         }
     }
     
-//     @Override
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//        
-//        if(sapModel.isInicia()){
-//           UtilFront.pintarBase(g);
-//        }else{
-//            paintComponents(g);
-//        }
-//
-//    }
-    
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         UtilFront.pintarBase(g, simulador);
     }
-
-    @Override
-    public void repaint() {
-        super.repaint(); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     
     public void paintComponents(Graphics g, boolean bool, String[] paso,int i) {
         super.paintComponents(g);
@@ -383,68 +361,6 @@ public class GUI_SAP extends javax.swing.JFrame implements ChangeListener{
         UtilFront.pintarBase(g,simulador);
     }
 
-//    @Override
-//    public void paintComponents(Graphics g) {
-//        super.paintComponents(g); //To change body of generated methods, choose Tools | Templates.
-//        UtilFront.pintarBase(g,simulador);
-//        String pasoControl =sapModel.getPasoControl();
-//        
-//        switch(pasoControl) {
-//            case "MI":
-////              UtilFront.MI(g);
-//              break;
-//            case "RI":
-////              UtilFront.RI(g);
-//              break;
-//            case "RO":
-////              UtilFront.RO(g);
-//              break;
-//            case "CE":
-////              UtilFront.CE(g);
-//              break;
-//            case "CO":
-////              UtilFront.CO(g);
-//                simulador.getPC().setEstado(true);
-//              break;
-//            case "II":
-////              UtilFront.II(g);
-//              break;
-//            case "IO":
-////              UtilFront.IO(g);
-//              break;
-//            case "AI":
-////              UtilFront.AI(g);
-//              break;
-//            case "AO":
-////              UtilFront.AO(g);
-//              break;
-//            case "EO":
-////              UtilFront.EO(g);
-//              break;
-//            case "SU":
-////              UtilFront.SU(g);
-//              break;
-//            case "BI":
-////              UtilFront.BI(g);
-//              break;
-//            case "OI":
-////              UtilFront.OI(g);
-//              break;
-//            case "J":
-////              UtilFront.J(g);
-//              break;
-//            case "FI":
-////              UtilFront.FI(g);
-//              break;
-//            case "OUT":
-//              UtilFront.OUT(g,sapModel.getInstruccion());
-//              break;
-//            default:
-//              // code block
-//          }
-//        
-//    }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
