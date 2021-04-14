@@ -47,7 +47,7 @@ public class Core implements Runnable {
         int i=0;
         while(i<memory.length){
             //s.getPC().setContenido(i+1);
-            if(memory[i]!=null){
+            if(memory[i]!=null && !memory[i].equals("")){
                 
                 if(memory[i].equals("HLT")){
 //                    pintarPaso(palabrasControl, memory[i],sap);
@@ -98,7 +98,7 @@ public class Core implements Runnable {
         
         for (int i = 0; i < memory.length; i++) {
             if(memory[i].equals("")){
-                memory[i] = "null";
+                memory[i] = null;
                 memoryBin[i] = constant.NOP + constant.NOP;
             }else {
                 String[] instruccion = memory[i].split(" ");
